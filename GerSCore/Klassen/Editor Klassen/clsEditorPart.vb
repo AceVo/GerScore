@@ -13,7 +13,7 @@
     '####################################################################################################
 
     Public Sub New(ByVal Part As clsPart, ByVal Editor As clsEditor)
-        Debug.Print("Enter Konstruktor {0} : {1}", Me.GetType, Part.Name)
+        Debug.Print("Enter in: {0} Sub ->  {1}", Me.GetType, "New()")
 
         _part = Part
         _editor = Editor
@@ -32,7 +32,7 @@
             _editor.Layertree.Nodes(_part.Level).Checked = True
         End If
 
-        Debug.Print("Leave Konstruktor {0} : {1}", Me.GetType, Part.Name)
+        Debug.Print("Leave in: {0} Sub ->  {1}", Me.GetType, "New()")
     End Sub
 
     '####################################################################################################

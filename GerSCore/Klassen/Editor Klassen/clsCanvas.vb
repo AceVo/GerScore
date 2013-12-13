@@ -212,8 +212,4 @@
         WriteCoordinates()
         _creater.Statusline.Text = sender.ToString
     End Sub
-
-    Private Sub clsCanvas_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
-        Debug.Print(_screen.Size.ToString)
-    End Sub
 End Class

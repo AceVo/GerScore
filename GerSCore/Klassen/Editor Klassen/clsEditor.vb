@@ -356,13 +356,4 @@
         e.Handled = True
     End Sub
 
-    Private Sub pcbEditor_Invalidated(sender As Object, e As System.Windows.Forms.InvalidateEventArgs) Handles pcbCanvas.Invalidated
-        Debug.Print("Validate bla")
-
-    End Sub
-
-    Private Sub pcbEditor_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles pcbCanvas.Paint
-        Debug.Print("bla")
-    End Sub
-
 End Class
