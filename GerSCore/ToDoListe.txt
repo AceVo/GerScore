@@ -1,0 +1,45 @@
+﻿############## Wichtig
+
+	+ Editor
+		+ Shapes fangen
+			- per Taste ein- und ausschalten können
+			- Fangpunkte einblenden können
+		+ aktuelle Koordinaten des Cursors anzeigen
+			- in der Richtigen Maßeinheit
+		+ Ansicht mich shift+Mausrad und über + & - Zoomen
+			- Mittelpunkt des Zoombereiches entsprechend dem Mauszeiger
+			- Maßeinheit entsprechend anpassen
+		+ Referenzpunkt implementieren
+		+ Rasterpunkte zeichnen
+			- Raster einstellen
+	+ Einheit einführen
+		- umschalten zwischen metrisch/insch
+		- verschiedene Auflösungen
+	+ Gerber Importieren
+	+ "Junctionpoints" implementieren
+	+ "Junctionlines" implementieren
+
+############## Nicht so wichtig
+
+	+ Shapes verschieben
+
+	+ Generell
+		- Reference schreiben
+
+
+############## optional
+
+
+
+#### erledigt!
+
+	+ aktuelle Koordinaten des Cursors anzeigen
+		- Mausposition über Shapes sind falsch
+	+ Shapes fangen
+		- Shape an bestimmten Punkten (Enden, Mitte,...) fangen
+		- Cursor entsprechend verschieben
+		- Shape farblich markieren
+	+ aktuelle Koordinaten des Cursors anzeigen
+
+	+ Fangrahmen am Cursor anzeigen
+		- dynamisch über Bild+ & Bild- Tasten verstellen
