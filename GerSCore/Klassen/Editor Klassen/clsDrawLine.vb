@@ -19,6 +19,8 @@
 
     Sub New(ByRef Gerber As clsGerber, ByVal Editor As clsEditor, _
             ByVal StartPoint_w_Unit As Point, ByVal EndPoint_w_Unit As Point, Optional ByVal Unit As String = "mm")
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsDrawLine", "New")
+
         Me.Gerber = Gerber
         Me.UStartPoint = StartPoint_w_Unit
         Me.UEndPoint = EndPoint_w_Unit
@@ -29,6 +31,8 @@
         _canvas = _editor.Canvas
 
         Me.init()
+
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsDrawLine", "New") : frmMain.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -36,11 +40,15 @@
     '####################################################################################################
 
     Private Sub init()
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsDrawLine", "init")
+
         Me.BorderColor = Me.Color
         Me.BorderStyle = Drawing2D.DashStyle.Solid
         Me.SelectionColor = Drawing.Color.Transparent
         AddHandler Me.MouseMove, AddressOf _editor.Canvas.clsCanvas_MouseMove
         AddHandler Me.MouseLeave, AddressOf _editor.Canvas.clsCanvas_MouseLeave
+
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsDrawLine", "init") : frmMain.DebugPrefix -= 1
     End Sub
 
     Private Sub clsDrawLine_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint

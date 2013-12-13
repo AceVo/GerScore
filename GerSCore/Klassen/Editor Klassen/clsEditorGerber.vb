@@ -14,7 +14,7 @@
     '####################################################################################################
 
     Public Sub New(ByVal Gerber As clsGerber, ByVal EditorPart As clsEditorPart, ByVal Editor As clsEditor)
-        Debug.Print("Enter Konstruktor {0} : {1}", MyClass.GetType, Gerber.Name)
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorGerber", "New")
 
         _gerber = Gerber
         _editorpart = EditorPart
@@ -45,7 +45,7 @@
             End Select
         Next
 
-        Debug.Print("Leave Konstruktor {0} : {1}", MyClass.GetType, Gerber.Name)
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorGerber", "New") : frmMain.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################

@@ -2,7 +2,7 @@
 
     Private Shared _project As clsProjekt
     Private Shared _usedcolors As New List(Of Color)
-    Public DebugPrefix As String
+    Public DebugPrefix As Integer = 0
     Public rnd As New Random
 
     Public Shared ReadOnly Property Project As clsProjekt
@@ -21,9 +21,13 @@
     End Property
 
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Debug.Print("-------------------------------------------------------------------------------------")
+        Debug.Print(StrDup(75, "-"))
+        DebugPrefix += 1 : Debug.Print(StrDup(DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "frmMain", "Load")
+
         Randomize()
         Titel_aktualisieren()
+
+        Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Load") : DebugPrefix -= 1
     End Sub
 
     Private Sub BeendenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BeendenToolStripMenuItem.Click
@@ -48,6 +52,7 @@
     End Sub
 
     Private Sub Tests_init()
+        DebugPrefix += 1 : Debug.Print(StrDup(DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "frmMain", "Tests_init")
 
         Me.NeuToolStripMenuItem.PerformClick()
 
@@ -74,10 +79,16 @@
 
         Me.PartBibliothekToolStripMenuItem.PerformClick()
 
+        Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Tests_init") : DebugPrefix -= 1
+
     End Sub
 
     Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+        DebugPrefix += 1 : Debug.Print(StrDup(DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "frmMain", "Shown")
+
         Tests_init()
+
+        Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Shown") : DebugPrefix -= 1
     End Sub
 
 End Class
