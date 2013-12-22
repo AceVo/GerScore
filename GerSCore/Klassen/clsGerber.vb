@@ -13,9 +13,13 @@
     '####################################################################################################
 
     Public Sub New(ByRef Parent As clsPart)
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsGerber", "New(Parent)")
+
         Me.Name = InputBox("Bezeichnung des Gerbers eingeben", "Gerbername")
         _parent = Parent
         Call Me.init() 'Anweisung für alle Konstruktoren gültig
+
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsGerber", "New(Parent)") : frmMain.DebugPrefix -= 1
     End Sub
 
     Public Sub New(ByVal Name As String, ByRef Parent As clsPart)

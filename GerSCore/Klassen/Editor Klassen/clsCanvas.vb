@@ -24,7 +24,6 @@
             .BackColor = Color.Transparent
             .Anchor = AnchorStyles.None
             .Dock = DockStyle.Fill
-            '  .Size = New Size(14300000, 14300000)
         End With
 
         Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsCanvas", "New") : frmMain.DebugPrefix -= 1
