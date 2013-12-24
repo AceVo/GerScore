@@ -2,6 +2,8 @@
 
     Private Shared _project As clsProjekt
     Private Shared _usedcolors As New List(Of Color)
+    Dim path As String
+
     Public DebugPrefix As Integer = 0
     Public rnd As New Random
 
@@ -35,7 +37,7 @@
     End Sub
 
     Private Sub NeuToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NeuToolStripMenuItem.Click
-        _project = New clsProjekt
+        _project = clsProjekt.Instance
         Titel_aktualisieren()
     End Sub
 
@@ -90,5 +92,4 @@
 
         Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Shown") : DebugPrefix -= 1
     End Sub
-
 End Class
