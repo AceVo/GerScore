@@ -156,7 +156,7 @@
     '####################################################################################################
 
     Private Sub Daten_einlesen()
-        Debug.Print("Enter in: {0} Sub ->  {1}", Me.GetType, "Daten_einlesen()")
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditor", "Daten_einlesen")
 
         For Each Part As clsPart In _project.Parts
             Dim EditorPart As New clsEditorPart(Part, Me)
@@ -169,7 +169,7 @@
             trvLayer.ExpandAll()
         End If
 
-        Debug.Print("Leave in: {0} Sub ->  {1}", Me.GetType, "Daten_einlesen()")
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditor", "Daten_einlesen") : frmMain.DebugPrefix -= 1
     End Sub
 
     Private Sub DrawMousePointer() Handles Me.CursorChanged
@@ -354,15 +354,6 @@
                 Canvas.Invalidate()
         End Select
         e.Handled = True
-    End Sub
-
-    Private Sub pcbEditor_Invalidated(sender As Object, e As System.Windows.Forms.InvalidateEventArgs) Handles pcbCanvas.Invalidated
-        Debug.Print("Validate bla")
-
-    End Sub
-
-    Private Sub pcbEditor_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles pcbCanvas.Paint
-        Debug.Print("bla")
     End Sub
 
 End Class

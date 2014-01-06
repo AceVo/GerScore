@@ -16,13 +16,17 @@
     '####################################################################################################
 
     Sub New(ByVal Creater As clsEditor)
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsCanvas", "New")
+
         _creater = Creater
         With _screen
             .Parent = Me
             .BackColor = Color.Transparent
             .Anchor = AnchorStyles.None
-            '  .Size = New Size(14300000, 14300000)
+            .Dock = DockStyle.Fill
         End With
+
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsCanvas", "New") : frmMain.DebugPrefix -= 1
     End Sub
     '####################################################################################################
     'Methoden
@@ -211,9 +215,5 @@
     Friend Sub clsCanvas_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
         WriteCoordinates()
         _creater.Statusline.Text = sender.ToString
-    End Sub
-
-    Private Sub clsCanvas_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
-        Debug.Print(_screen.Size.ToString)
     End Sub
 End Class

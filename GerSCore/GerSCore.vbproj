@@ -95,6 +95,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\frmASCIIImport.Designer.vb">
+      <DependentUpon>frmASCIIImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmASCIIImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Klassen\Editor Klassen\clsCanvas.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     <Compile Include="Klassen\clsProject.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmASCIIImport.resx">
+      <DependentUpon>frmASCIIImport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPartlist.resx">
       <DependentUpon>frmPartlist.vb</DependentUpon>
     </EmbeddedResource>
