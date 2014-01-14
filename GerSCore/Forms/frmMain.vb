@@ -88,15 +88,11 @@ Public Class frmMain
     Protected Friend Sub MenuRecentProjectsInit()
         With My.Settings
             If IsNothing(.RecentProjects) Then .RecentProjects = New Specialized.StringCollection
-<<<<<<< HEAD
             RecentProjectsToolStripMenuItem.DropDownItems.Clear()
             If .RecentProjects.Count = 0 Then
                 RecentProjectsToolStripMenuItem.DropDownItems.Add("<...nichts...>")
                 Exit Sub
             End If
-=======
-
->>>>>>> d1cb4c8f337a3c0634f861cbb237507cb385c9c9
             For Each Element In .RecentProjects
                 If Not IO.File.Exists(Element) Then .RecentProjects.Remove(Element)
             Next
@@ -105,19 +101,12 @@ Public Class frmMain
                     .RecentProjects.RemoveAt(i - 1)
                 Next
             End If
-<<<<<<< HEAD
-=======
             RecentProjectsToolStripMenuItem.DropDownItems.Clear()
->>>>>>> d1cb4c8f337a3c0634f861cbb237507cb385c9c9
             For Each Element In .RecentProjects
                 Dim Item As New ToolStripMenuItem(Element)
                 AddHandler Item.Click, AddressOf RecentProject_Click
                 RecentProjectsToolStripMenuItem.DropDownItems.Add(Item)
             Next
-<<<<<<< HEAD
-=======
-
->>>>>>> d1cb4c8f337a3c0634f861cbb237507cb385c9c9
         End With
     End Sub
 

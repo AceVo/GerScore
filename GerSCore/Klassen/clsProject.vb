@@ -150,11 +150,8 @@
     Private Sub Project_save() Handles Me.Project_saved
         _saved = True
         frmMain.SpeichernToolStripMenuItem.Enabled = True
-<<<<<<< HEAD
         frmMain.MenuRecentProjects_Add(_path)
-=======
         frmMain.MenuRecentProjectsInit()
->>>>>>> d1cb4c8f337a3c0634f861cbb237507cb385c9c9
         Title_update()
     End Sub
 End Class
