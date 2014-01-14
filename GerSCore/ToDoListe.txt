@@ -1,5 +1,10 @@
 ﻿############## Wichtig
 
+	+ Generell
+		+ Speichern vom Projekt
+		+ Speichern einzelner Parts
+		+ Exportieren von Parts
+		+ Exportieren von Gerber
 	+ Editor
 		+ Shapes fangen
 			- per Taste ein- und ausschalten können

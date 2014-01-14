@@ -1,9 +1,12 @@
-﻿Public Class clsEditorPart
+﻿<Serializable> Public Class clsEditorPart
     Inherits clsEditorItem
+    Implements IDisposable
 
     '####################################################################################################
     'Deklaration
     '####################################################################################################
+
+    Private _className As String = "clsEditorPart"
 
     Private _part As clsPart
     Private _sc As New PowerPacks.ShapeContainer
@@ -13,7 +16,10 @@
     '####################################################################################################
 
     Public Sub New(ByVal Part As clsPart, ByVal Editor As clsEditor)
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorPart", "New")
+        Dim _type As String = "Sub"
+        Dim _structname As String = "New"
+        Dim _name As String = Part.Name
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         _part = Part
         _editor = Editor
@@ -32,12 +38,25 @@
             _editor.Layertree.Nodes(_part.Level).Checked = True
         End If
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorPart", "New") : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
     'Methoden
     '####################################################################################################
+
+    Overrides Sub Dispose(ByVal disposing As Boolean)
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorPart", "Dispose")
+        If Not disposing Then
+            _part = Nothing
+            _sc.Parent = Nothing
+            _sc.Dispose()
+            _sc = Nothing
+            _editor = Nothing
+            _disposed = True
+        End If
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorPart", "Dispose") : frmMain.DebugPrefix -= 1
+    End Sub
 
     '####################################################################################################
     'Funktionen
@@ -72,4 +91,8 @@
     'Events
     '####################################################################################################
 
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsEditorPart Finalize")
+        MyBase.Finalize()
+    End Sub
 End Class

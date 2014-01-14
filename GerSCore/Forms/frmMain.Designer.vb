@@ -27,6 +27,7 @@ Partial Class frmMain
         Me.DateiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NeuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ÖffnenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RecentProjectsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.SpeichernToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SpeichernunterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -55,8 +56,11 @@ Partial Class frmMain
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PartBibliothekToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TestsInitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlProjekt = New System.Windows.Forms.Panel()
         Me.dlgColor = New System.Windows.Forms.ColorDialog()
+        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
+        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
         Me.MnuStrMain.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,7 +75,7 @@ Partial Class frmMain
         '
         'DateiToolStripMenuItem
         '
-        Me.DateiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NeuToolStripMenuItem, Me.ÖffnenToolStripMenuItem, Me.toolStripSeparator, Me.SpeichernToolStripMenuItem, Me.SpeichernunterToolStripMenuItem, Me.toolStripSeparator1, Me.DruckenToolStripMenuItem, Me.SeitenansichtToolStripMenuItem, Me.toolStripSeparator2, Me.BeendenToolStripMenuItem})
+        Me.DateiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NeuToolStripMenuItem, Me.ÖffnenToolStripMenuItem, Me.RecentProjectsToolStripMenuItem, Me.toolStripSeparator, Me.SpeichernToolStripMenuItem, Me.SpeichernunterToolStripMenuItem, Me.toolStripSeparator1, Me.DruckenToolStripMenuItem, Me.SeitenansichtToolStripMenuItem, Me.toolStripSeparator2, Me.BeendenToolStripMenuItem})
         Me.DateiToolStripMenuItem.Name = "DateiToolStripMenuItem"
         Me.DateiToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.DateiToolStripMenuItem.Text = "&Datei"
@@ -83,17 +87,22 @@ Partial Class frmMain
         Me.NeuToolStripMenuItem.Name = "NeuToolStripMenuItem"
         Me.NeuToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.NeuToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-        Me.NeuToolStripMenuItem.Text = "&Neues Projekt"
+        Me.NeuToolStripMenuItem.Text = "&Neues Projekt..."
         '
         'ÖffnenToolStripMenuItem
         '
-        Me.ÖffnenToolStripMenuItem.Enabled = False
         Me.ÖffnenToolStripMenuItem.Image = CType(resources.GetObject("ÖffnenToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ÖffnenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ÖffnenToolStripMenuItem.Name = "ÖffnenToolStripMenuItem"
         Me.ÖffnenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
         Me.ÖffnenToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-        Me.ÖffnenToolStripMenuItem.Text = "Projekt &öffnen"
+        Me.ÖffnenToolStripMenuItem.Text = "Projekt &öffnen..."
+        '
+        'RecentProjectsToolStripMenuItem
+        '
+        Me.RecentProjectsToolStripMenuItem.Name = "RecentProjectsToolStripMenuItem"
+        Me.RecentProjectsToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
+        Me.RecentProjectsToolStripMenuItem.Text = "zuletzt geöffnete Projekte"
         '
         'toolStripSeparator
         '
@@ -115,7 +124,7 @@ Partial Class frmMain
         Me.SpeichernunterToolStripMenuItem.Enabled = False
         Me.SpeichernunterToolStripMenuItem.Name = "SpeichernunterToolStripMenuItem"
         Me.SpeichernunterToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
-        Me.SpeichernunterToolStripMenuItem.Text = "Projekt Speichern &unter"
+        Me.SpeichernunterToolStripMenuItem.Text = "Projekt Speichern &unter..."
         '
         'toolStripSeparator1
         '
@@ -279,7 +288,7 @@ Partial Class frmMain
         '
         'DatenToolStripMenuItem
         '
-        Me.DatenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PartBibliothekToolStripMenuItem})
+        Me.DatenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PartBibliothekToolStripMenuItem, Me.TestsInitToolStripMenuItem})
         Me.DatenToolStripMenuItem.Enabled = False
         Me.DatenToolStripMenuItem.Name = "DatenToolStripMenuItem"
         Me.DatenToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
@@ -290,6 +299,12 @@ Partial Class frmMain
         Me.PartBibliothekToolStripMenuItem.Name = "PartBibliothekToolStripMenuItem"
         Me.PartBibliothekToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.PartBibliothekToolStripMenuItem.Text = "Part &Bibliothek"
+        '
+        'TestsInitToolStripMenuItem
+        '
+        Me.TestsInitToolStripMenuItem.Name = "TestsInitToolStripMenuItem"
+        Me.TestsInitToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TestsInitToolStripMenuItem.Text = "Tests init"
         '
         'pnlProjekt
         '
@@ -305,6 +320,10 @@ Partial Class frmMain
         '
         Me.dlgColor.AnyColor = True
         Me.dlgColor.FullOpen = True
+        '
+        'dlgOpen
+        '
+        Me.dlgOpen.FileName = "OpenFileDialog1"
         '
         'frmMain
         '
@@ -356,5 +375,9 @@ Partial Class frmMain
     Friend WithEvents DatenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PartBibliothekToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents dlgColor As System.Windows.Forms.ColorDialog
+    Friend WithEvents TestsInitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents dlgSave As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents dlgOpen As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents RecentProjectsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

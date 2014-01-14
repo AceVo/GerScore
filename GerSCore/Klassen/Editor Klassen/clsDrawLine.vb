@@ -3,6 +3,8 @@
     Inherits PowerPacks.LineShape
     Implements IShape
 
+    Private _classname As String = "clsDrawLine"
+
     Private _snappoints As New List(Of Point)
     Private _color As Color
     Private _focuscolor As Color = Color.Red
@@ -12,6 +14,7 @@
     Private _ustartpoint As Point
     Private _uendpoint As Point
     Private WithEvents _canvas As clsCanvas
+    Private _disposed As Boolean = False
 
     '####################################################################################################
     'Konstruktoren
@@ -45,14 +48,10 @@
         Me.BorderColor = Me.Color
         Me.BorderStyle = Drawing2D.DashStyle.Solid
         Me.SelectionColor = Drawing.Color.Transparent
-        AddHandler Me.MouseMove, AddressOf _editor.Canvas.clsCanvas_MouseMove
-        AddHandler Me.MouseLeave, AddressOf _editor.Canvas.clsCanvas_MouseLeave
+        AddHandler Me.MouseMove, AddressOf _canvas.clsCanvas_MouseMove
+        AddHandler Me.MouseLeave, AddressOf _canvas.clsCanvas_MouseLeave
 
         Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsDrawLine", "init") : frmMain.DebugPrefix -= 1
-    End Sub
-
-    Private Sub clsDrawLine_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
-        ' e.Graphics.RenderingOrigin = New Point(100, 100)
     End Sub
 
     Private Sub calc_snappoints() Handles Me.StartPointChanged, Me.EndPointChanged
@@ -65,6 +64,32 @@
     Private Sub Fokussieren() Implements IShape.Fokussieren
         Me.Focus()
         Me.OnMouseMove(Nothing)
+    End Sub
+
+    Overloads Sub Dispose()
+        Dispose(_disposed)
+    End Sub
+
+    Protected Overloads Sub Dispose(ByVal disposing As Boolean)
+        Dim _type As String = "Sub"
+        Dim _structname As String = "Dispose"
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _classname, _type, _structname)
+
+        If Not disposing Then
+            _snappoints = Nothing
+            _gerber = Nothing
+            _editor = Nothing
+            RemoveHandler Me.MouseMove, AddressOf _canvas.clsCanvas_MouseMove
+            RemoveHandler Me.MouseLeave, AddressOf _canvas.clsCanvas_MouseLeave
+            _canvas = Nothing
+            _disposed = True
+        End If
+
+        Me.Events.Dispose()
+
+
+        Debug.Print(Me.Events.ToString)
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2}", _classname, _type, _structname) : frmMain.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -88,7 +113,6 @@
         Return Punkt
 
     End Function
-
 
     '####################################################################################################
     'Property
@@ -182,4 +206,8 @@
     End Sub
 
 
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsDrawLine Finalize")
+        MyBase.Finalize()
+    End Sub
 End Class

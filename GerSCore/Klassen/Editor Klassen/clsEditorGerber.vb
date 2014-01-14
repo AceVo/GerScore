@@ -1,8 +1,10 @@
-﻿Public Class clsEditorGerber
+﻿<Serializable> Public Class clsEditorGerber
     Inherits clsEditorItem
     '####################################################################################################
     'Deklaration
     '####################################################################################################
+
+    Private _className As String = "clsEditorGerber"
 
     Private WithEvents _gerber As clsGerber
     Protected _sc As New PowerPacks.ShapeContainer
@@ -14,7 +16,10 @@
     '####################################################################################################
 
     Public Sub New(ByVal Gerber As clsGerber, ByVal EditorPart As clsEditorPart, ByVal Editor As clsEditor)
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorGerber", "New")
+        Dim _type As String = "Sub"
+        Dim _structname As String = "New"
+        Dim _name As String = Gerber.Name
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         _gerber = Gerber
         _editorpart = EditorPart
@@ -26,8 +31,6 @@
             .Name = _gerber.Name
             .Location = New Point(0, 0)
             .BackColor = Color.Transparent
-            '.AutoScroll = True
-            ' AddHandler .Paint, AddressOf _editor.Canvas.PaintTest
         End With
         _colorpicker = New clsColorPicker(_editor, _gerber)
 
@@ -45,12 +48,29 @@
             End Select
         Next
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorGerber", "New") : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
     'Methoden
     '####################################################################################################
+
+    Overrides Sub Dispose(ByVal disposing As Boolean)
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorGerber", "Dispose")
+        If Not disposing Then
+            For i = _sc.Shapes.Count - 1 To 0 Step -1
+                CType(_sc.Shapes.Item(i), clsDrawLine).Dispose()
+            Next
+            _sc.Shapes.Clear()
+            _sc = Nothing
+            _gerber = Nothing
+            _editorpart = Nothing
+            _editor = Nothing
+            _colorpicker = Nothing
+            _disposed = True
+        End If
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorGerber", "Dispose") : frmMain.DebugPrefix -= 1
+    End Sub
 
     '####################################################################################################
     'Funktionen
@@ -92,4 +112,8 @@
         _colorpicker.BackColor = _gerber.Color
     End Sub
 
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsEditorGerber Finalize")
+        MyBase.Finalize()
+    End Sub
 End Class

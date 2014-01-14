@@ -1,12 +1,12 @@
 ﻿Public Class frmPartLib
+    Private _editor As clsEditor
 
     Private Sub frmPartLib_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Me.KeyPreview = True
 
-        Dim Editor As New clsEditor(pnlEditor)
-        AddHandler Editor.Layertree.AfterSelect, AddressOf Layertree_AfterSelect
-        'Editor.Canvas.Invalidate()
+        _editor = New clsEditor(pnlEditor)
+        AddHandler _editor.Layertree.AfterSelect, AddressOf Layertree_AfterSelect
 
         If frmMain.Project Is Nothing Then
             Me.Text = "Gerber Shift Correction"
@@ -20,7 +20,10 @@
     End Sub
 
     Private Sub SchließenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SchließenToolStripMenuItem.Click
+        _editor.Dispose()
+        _editor = Nothing
         Me.Close()
+        GC.Collect() : GC.WaitForPendingFinalizers()
     End Sub
 
     Private Sub NeuToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NeuToolStripMenuItem.Click

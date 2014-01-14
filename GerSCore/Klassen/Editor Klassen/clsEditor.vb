@@ -1,8 +1,10 @@
 ﻿Public Class clsEditor
-
+    Implements IDisposable
     '####################################################################################################
     'Deklaration
     '####################################################################################################
+
+    Private _className As String = "clsEditor"
 
     Private WithEvents pcbCanvas As New clsCanvas(Me)
     Private sstStatus As New StatusStrip
@@ -23,6 +25,7 @@
     Private _EditorParts As New Dictionary(Of String, clsEditorPart)
     Private _EditorGerber As New Dictionary(Of String, clsEditorGerber)
     Private _unit As String = "mm"
+    Private _disposed As Boolean = False
 
     Private Event CursorChanged()
 
@@ -31,6 +34,9 @@
     '####################################################################################################
 
     Sub New(ByVal Target As Control, Optional ByVal LayerViewer As Boolean = True)
+        Dim _type As String = "Sub"
+        Dim _structname As String = "New"
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
 
         _target = Target
         _layerviewer = LayerViewer
@@ -149,6 +155,7 @@
         Daten_einlesen()
         Canvas.Screen.Location = New Point(0, 0)
 
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2}", _className, _type, _structname) : frmMain.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -156,8 +163,9 @@
     '####################################################################################################
 
     Private Sub Daten_einlesen()
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditor", "Daten_einlesen")
-
+        Dim _type As String = "Sub"
+        Dim _structname As String = "Daten_einlesen"
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
         For Each Part As clsPart In _project.Parts
             Dim EditorPart As New clsEditorPart(Part, Me)
             For Each Gerber As clsGerber In Part.Gerber
@@ -165,11 +173,9 @@
             Next
         Next
 
-        If _layerviewer = True Then
-            trvLayer.ExpandAll()
-        End If
+        If _layerviewer Then trvLayer.ExpandAll()
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditor", "Daten_einlesen") : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2}", _className, _type, _structname) : frmMain.DebugPrefix -= 1
     End Sub
 
     Private Sub DrawMousePointer() Handles Me.CursorChanged
@@ -195,6 +201,48 @@
 
     End Sub
 
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Dispose(_disposed)
+    End Sub
+
+    Protected Sub Dispose(ByVal disposing As Boolean)
+        Dim _type As String = "Sub"
+        Dim _structname As String = "Dispose"
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+
+
+        If Not disposing Then
+
+            RemoveHandler _target.FindForm.KeyDown, AddressOf KeyDown
+
+            For Each Gerber As clsEditorGerber In _EditorGerber.Values
+                Gerber.Dispose()
+            Next
+            _EditorGerber = Nothing
+            For Each Part As clsEditorPart In _EditorParts.Values
+                Part.Dispose()
+            Next
+            _EditorParts = Nothing
+
+            sstStatus.Dispose()
+            tslStatusLabel.Dispose()
+            tslMousePos.Dispose()
+            Canvas.Dispose()
+            splContainerCanvas.Dispose()
+            If Layerviewer = True Then
+                For i = scColorPicker.Shapes.Count - 1 To 0 Step -1
+                    CType(scColorPicker.Shapes.Item(i), clsColorPicker).Dispose()
+                Next
+                scColorPicker.Dispose()
+                trvLayer.Dispose()
+                tstLayerViewer.Dispose()
+                tsbTest.Dispose()
+                splContainerEditor.Dispose()
+            End If
+            _disposed = True
+        End If
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2}", _className, _type, _structname) : frmMain.DebugPrefix -= 1
+    End Sub
 
     '####################################################################################################
     'Funktionen
@@ -258,16 +306,6 @@
             Return Canvas.Zoomfactor
         End Get
     End Property
-
-    'Property Backcolor As Color
-    '    Get
-    '        Return _backcolor
-    '    End Get
-    '    Set(value As Color)
-    '        _backcolor = value
-    '    End Set
-    'End Property
-
 
     '####################################################################################################
     'Events
@@ -356,4 +394,8 @@
         e.Handled = True
     End Sub
 
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsEditor Finalize")
+        MyBase.Finalize()
+    End Sub
 End Class

@@ -1,4 +1,4 @@
-﻿Public Class clsShapes
+﻿<Serializable> Public Class clsShapes
     Private _parent As clsGerber
     Private _unit As String
 

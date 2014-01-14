@@ -1,6 +1,6 @@
 ﻿Public Class clsCanvas
     Inherits PictureBox
-
+    Implements IDisposable
 
     '####################################################################################################
     'Deklaration
@@ -215,5 +215,10 @@
     Friend Sub clsCanvas_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
         WriteCoordinates()
         _creater.Statusline.Text = sender.ToString
+    End Sub
+
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsCanvas Finalize")
+        MyBase.Finalize()
     End Sub
 End Class

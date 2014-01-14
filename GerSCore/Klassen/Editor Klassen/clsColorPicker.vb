@@ -1,9 +1,12 @@
 ﻿Public Class clsColorPicker
     Inherits PowerPacks.OvalShape
 
+    Private _classname As String = "clsColorPicker"
+
     Private _farbe As Color
     Private _gerber As clsGerber
     Private _target As clsEditor
+    Private _disposed As Boolean = False
 
     '####################################################################################################
     'Konstruktoren
@@ -34,6 +37,26 @@
     'Funktionen
     '####################################################################################################
 
+    Overloads Sub Dispose()
+        Dispose(_disposed)
+    End Sub
+
+    Protected Overloads Sub Dispose(ByVal disposing As Boolean)
+        Dim _type As String = "Sub"
+        Dim _structname As String = "Dispose"
+        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _classname, _type, _structname)
+
+        If Not disposing Then
+            Me.Parent.Shapes.Remove(Me)
+            _gerber = Nothing
+            _target = Nothing
+            Me.Parent = Nothing
+            _disposed = True
+        End If
+
+        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2}", _classname, _type, _structname) : frmMain.DebugPrefix -= 1
+    End Sub
+
     '####################################################################################################
     'Events
     '####################################################################################################
@@ -63,4 +86,8 @@
         End Set
     End Property
 
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsColorPicker Finalize")
+        MyBase.Finalize()
+    End Sub
 End Class
