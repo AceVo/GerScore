@@ -8,10 +8,14 @@
     Private _saved As Boolean = False
     <NonSerialized> Private _path As String
 
-    Public Parts As New List(Of clsPart)
+    Friend Parts As New List(Of clsPart)
 
-    Private Event Project_changed()
-    Private Event Project_saved()
+    Private Event Loaded()
+    Private Event Saved()
+    Private Event Created()
+    Private Event SaveStatusChanged()
+    Private Event NameChanged()
+    Private Event PartAdded()
 
 
     '####################################################################################################
@@ -25,11 +29,10 @@
         frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Project_initiated()
-
         Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
     End Sub
 
-    Protected Friend Sub Project_initiated(Optional ByVal Loaded As Boolean = False)
+    Friend Sub Project_initiated(Optional ByVal Loaded As Boolean = False)
         Dim _type As String = "Sub"
         Dim _structname As String = "Project_initiated"
         frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
@@ -38,14 +41,16 @@
         frmMain.pnlProjekt.Visible = True
         frmMain.SpeichernunterToolStripMenuItem.Enabled = True
 
-        If Loaded = True Then
+        If Loaded Then
             frmMain.SpeichernToolStripMenuItem.Enabled = True
             _path = My.Settings.RecentPath
             _saved = True
-            Title_update()
+            RaiseEvent Loaded()
         Else
-            RaiseEvent Project_changed()
+            RaiseEvent Created()
         End If
+
+        'AddHandler Me.Changed, AddressOf frmMain.Title_update
 
         Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
     End Sub
@@ -54,7 +59,7 @@
     'Methoden
     '####################################################################################################
 
-    Public Sub AddPart(ByVal Name As String)
+    Friend Sub AddPart(ByVal Name As String)
         Dim _type As String = "Method"
         Dim _structname As String = "AddPart"
         Dim _name2 = Name
@@ -62,12 +67,12 @@
 
         Me.Parts.Add(New clsPart(Name))
 
-        RaiseEvent Project_changed()
+        RaiseEvent PartAdded()
 
         Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2) : frmMain.DebugPrefix -= 1
     End Sub
 
-    Public Sub Save(Optional ByVal Path As String = "")
+    Friend Sub Save(Optional ByVal Path As String = "")
         Dim fs As FileStream
         With frmMain
 
@@ -86,16 +91,10 @@
             fs.Close()
             My.Settings.RecentPath = Path
             _path = Path
-            RaiseEvent Project_saved()
+            RaiseEvent Saved()
         End With
     End Sub
 
-    Private Sub Title_update()
-        frmMain.Text = "GerScore - Gerber Shift Correction - " & Me.Name
-        If Not _saved Then
-            frmMain.Text = frmMain.Text & "*"
-        End If
-    End Sub
     '####################################################################################################
     'Funktionen
     '####################################################################################################
@@ -111,8 +110,7 @@
         End Get
         Set(ByVal value As String)
             _name = value
-
-            RaiseEvent Project_changed()
+            RaiseEvent NameChanged()
         End Set
     End Property
 
@@ -138,20 +136,30 @@
         End Get
     End Property
 
+    ReadOnly Property SavedStatus As Boolean
+        Get
+            Return _saved
+        End Get
+    End Property
     '####################################################################################################
     'Events
     '####################################################################################################
 
-    Private Sub Project_edited() Handles Me.Project_changed
+    Private Sub Project_edited() Handles Me.NameChanged, Me.PartAdded, Me.Created
         _saved = False
-        Title_update()
+        RaiseEvent SaveStatusChanged()
     End Sub
 
-    Private Sub Project_save() Handles Me.Project_saved
+    Private Sub Project_save() Handles Me.Saved, Me.Loaded
         _saved = True
-        frmMain.SpeichernToolStripMenuItem.Enabled = True
-        frmMain.MenuRecentProjects_Add(_path)
-        frmMain.MenuRecentProjectsInit()
-        Title_update()
+        RaiseEvent SaveStatusChanged()
     End Sub
+
+    Private Sub Title_update() Handles Me.SaveStatusChanged
+        frmMain.Text = "GerScore - Gerber Shift Correction - " & Me.Name
+        If Not _saved Then
+            frmMain.Text = frmMain.Text & "*"
+        End If
+    End Sub
+
 End Class

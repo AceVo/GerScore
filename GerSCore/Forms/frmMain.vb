@@ -5,8 +5,8 @@ Public Class frmMain
     'Deklaration
     '####################################################################################################
 
-    Private Shared WithEvents _project As clsProjekt
-    Private Shared _usedcolors As New List(Of Color)
+    Private WithEvents _project As clsProjekt
+    Private _usedcolors As New List(Of Color)
     Dim fs As FileStream
 
     Public DebugPrefix As Integer = 0
@@ -128,13 +128,13 @@ Public Class frmMain
     'Property
     '####################################################################################################
 
-    Public Shared ReadOnly Property Project As clsProjekt
+    Friend ReadOnly Property Project As clsProjekt
         Get
-            Return _project
+            Return _project 'clsProjekt.Instance
         End Get
     End Property
 
-    Public Shared Property UsedColor As List(Of Color)
+    Friend Property UsedColor As List(Of Color)
         Get
             Return _usedcolors
         End Get
@@ -160,7 +160,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SpeichernToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeichernToolStripMenuItem.Click
-        _project.Save(_project.Path)
+        _project.Save(Project.Path)
     End Sub
 
     Private Sub SpeichernunterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeichernunterToolStripMenuItem.Click
