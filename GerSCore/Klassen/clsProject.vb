@@ -13,9 +13,9 @@
     Private Event Loaded()
     Private Event Saved()
     Private Event Created()
-    Private Event SaveStatusChanged()
-    Private Event NameChanged()
-    Private Event PartAdded()
+    <NonSerialized> Friend Event SaveStatusChanged()
+    <NonSerialized> Friend Event NameChanged()
+    <NonSerialized> Friend Event PartAdded()
 
 
     '####################################################################################################
@@ -26,33 +26,30 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
         _name = "Neues Projekt"
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Project_initiated()
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
     End Sub
 
     Friend Sub Project_initiated(Optional ByVal Loaded As Boolean = False)
         Dim _type As String = "Sub"
         Dim _structname As String = "Project_initiated"
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
-        frmMain.DatenToolStripMenuItem.Enabled = True
-        frmMain.pnlProjekt.Visible = True
-        frmMain.SpeichernunterToolStripMenuItem.Enabled = True
+        'frmMain.DatenToolStripMenuItem.Enabled = True
+        'frmMain.pnlProjekt.Visible = True
+        'frmMain.SpeichernunterToolStripMenuItem.Enabled = True
 
         If Loaded Then
             frmMain.SpeichernToolStripMenuItem.Enabled = True
             _path = My.Settings.RecentPath
-            _saved = True
             RaiseEvent Loaded()
         Else
             RaiseEvent Created()
         End If
 
-        'AddHandler Me.Changed, AddressOf frmMain.Title_update
-
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -63,19 +60,18 @@
         Dim _type As String = "Method"
         Dim _structname As String = "AddPart"
         Dim _name2 = Name
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
 
         Me.Parts.Add(New clsPart(Name))
 
         RaiseEvent PartAdded()
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2) : clsProgramm.DebugPrefix -= 1
     End Sub
 
     Friend Sub Save(Optional ByVal Path As String = "")
         Dim fs As FileStream
         With frmMain
-
             If Path = "" Then
                 .dlgSave.Filter = "GerSCore Projekte (*.gsProj)|*.gsProj"
                 If IO.Directory.Exists(My.Settings.RecentPath) Then .dlgSave.InitialDirectory = My.Settings.RecentPath
@@ -120,6 +116,7 @@
         End Get
     End Property
 
+
     ''' <summary>
     ''' Project Singleton Instance
     ''' </summary>
@@ -136,11 +133,12 @@
         End Get
     End Property
 
-    ReadOnly Property SavedStatus As Boolean
+    ReadOnly Property SaveStatus As Boolean
         Get
             Return _saved
         End Get
     End Property
+
     '####################################################################################################
     'Events
     '####################################################################################################
@@ -155,11 +153,11 @@
         RaiseEvent SaveStatusChanged()
     End Sub
 
-    Private Sub Title_update() Handles Me.SaveStatusChanged
-        frmMain.Text = "GerScore - Gerber Shift Correction - " & Me.Name
-        If Not _saved Then
-            frmMain.Text = frmMain.Text & "*"
-        End If
-    End Sub
+    'Private Sub Title_update() Handles Me.SaveStatusChanged
+    '    frmMain.Text = "GerScore - Gerber Shift Correction - " & Me.Name
+    '    If Not _saved Then
+    '        frmMain.Text = frmMain.Text & "*"
+    '    End If
+    'End Sub
 
 End Class

@@ -55,15 +55,15 @@ Partial Class frmMain
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProjektToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PartBibliothekToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TestsInitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlProjekt = New System.Windows.Forms.Panel()
+        Me.lstParts = New System.Windows.Forms.ListBox()
+        Me.lblProjectName = New System.Windows.Forms.Label()
         Me.dlgColor = New System.Windows.Forms.ColorDialog()
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
-        Me.lblProjectName = New System.Windows.Forms.Label()
-        Me.ProjektToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.MnuStrMain.SuspendLayout()
         Me.pnlProjekt.SuspendLayout()
         Me.SuspendLayout()
@@ -299,22 +299,28 @@ Partial Class frmMain
         Me.DatenToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.DatenToolStripMenuItem.Text = "&Daten"
         '
+        'ProjektToolStripMenuItem
+        '
+        Me.ProjektToolStripMenuItem.Name = "ProjektToolStripMenuItem"
+        Me.ProjektToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.ProjektToolStripMenuItem.Text = "Projekt Eigenschaften..."
+        '
         'PartBibliothekToolStripMenuItem
         '
         Me.PartBibliothekToolStripMenuItem.Name = "PartBibliothekToolStripMenuItem"
-        Me.PartBibliothekToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.PartBibliothekToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.PartBibliothekToolStripMenuItem.Text = "Part &Bibliothek"
         '
         'TestsInitToolStripMenuItem
         '
         Me.TestsInitToolStripMenuItem.Name = "TestsInitToolStripMenuItem"
-        Me.TestsInitToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TestsInitToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.TestsInitToolStripMenuItem.Text = "Tests init"
         '
         'pnlProjekt
         '
         Me.pnlProjekt.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.pnlProjekt.Controls.Add(Me.ListBox1)
+        Me.pnlProjekt.Controls.Add(Me.lstParts)
         Me.pnlProjekt.Controls.Add(Me.lblProjectName)
         Me.pnlProjekt.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProjekt.Location = New System.Drawing.Point(0, 24)
@@ -322,6 +328,26 @@ Partial Class frmMain
         Me.pnlProjekt.Size = New System.Drawing.Size(1187, 647)
         Me.pnlProjekt.TabIndex = 1
         Me.pnlProjekt.Visible = False
+        '
+        'lstParts
+        '
+        Me.lstParts.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
+        Me.lstParts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstParts.FormattingEnabled = True
+        Me.lstParts.Location = New System.Drawing.Point(12, 66)
+        Me.lstParts.Name = "lstParts"
+        Me.lstParts.Size = New System.Drawing.Size(120, 93)
+        Me.lstParts.TabIndex = 1
+        '
+        'lblProjectName
+        '
+        Me.lblProjectName.AutoSize = True
+        Me.lblProjectName.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProjectName.Location = New System.Drawing.Point(12, 12)
+        Me.lblProjectName.Name = "lblProjectName"
+        Me.lblProjectName.Size = New System.Drawing.Size(180, 29)
+        Me.lblProjectName.TabIndex = 0
+        Me.lblProjectName.Text = "lblProjectName"
         '
         'dlgColor
         '
@@ -332,50 +358,25 @@ Partial Class frmMain
         '
         Me.dlgOpen.FileName = "OpenFileDialog1"
         '
-        'lblProjectName
-        '
-        Me.lblProjectName.AutoSize = True
-        Me.lblProjectName.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProjectName.Location = New System.Drawing.Point(12, 11)
-        Me.lblProjectName.Name = "lblProjectName"
-        Me.lblProjectName.Size = New System.Drawing.Size(31, 29)
-        Me.lblProjectName.TabIndex = 0
-        Me.lblProjectName.Text = "..."
-        '
-        'ProjektToolStripMenuItem
-        '
-        Me.ProjektToolStripMenuItem.Name = "ProjektToolStripMenuItem"
-        Me.ProjektToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.ProjektToolStripMenuItem.Text = "Projekt Eigenschaften..."
-        '
-        'ListBox1
-        '
-        Me.ListBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(12, 52)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 95)
-        Me.ListBox1.TabIndex = 1
-        '
         'frmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(122,Byte),Integer), CType(CType(209,Byte),Integer), CType(CType(181,Byte),Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1187, 671)
         Me.Controls.Add(Me.pnlProjekt)
         Me.Controls.Add(Me.MnuStrMain)
         Me.MainMenuStrip = Me.MnuStrMain
         Me.Name = "frmMain"
         Me.Text = "Gerber Shift Correction"
-        Me.MnuStrMain.ResumeLayout(false)
-        Me.MnuStrMain.PerformLayout
-        Me.pnlProjekt.ResumeLayout(false)
-        Me.pnlProjekt.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.MnuStrMain.ResumeLayout(False)
+        Me.MnuStrMain.PerformLayout()
+        Me.pnlProjekt.ResumeLayout(False)
+        Me.pnlProjekt.PerformLayout()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Friend WithEvents MnuStrMain As System.Windows.Forms.MenuStrip
     Friend WithEvents DateiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NeuToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -416,6 +417,6 @@ End Sub
     Friend WithEvents RecentProjectsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblProjectName As System.Windows.Forms.Label
     Friend WithEvents ProjektToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents lstParts As System.Windows.Forms.ListBox
 
 End Class

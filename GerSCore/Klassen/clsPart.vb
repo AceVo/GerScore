@@ -2,6 +2,8 @@
 
     Private _className As String = "clsPart"
 
+    <NonSerialized> Private Main As clsMainController = clsProgramm.MainController
+
     Private _name As String
     Private _gerber As New List(Of clsGerber)
 
@@ -13,9 +15,9 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
         _name = Name
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -26,11 +28,11 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "AddGerber"
         Dim _name2 = Name
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
 
         Me.Gerber.Add(New clsGerber(Name, Me))
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2) : clsProgramm.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -61,7 +63,7 @@
 
     ReadOnly Property Level As Integer
         Get
-            Return frmMain.Project.Parts.IndexOf(Me)
+            Return Main.Project.Parts.IndexOf(Me)
         End Get
     End Property
 

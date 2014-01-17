@@ -16,7 +16,7 @@
     '####################################################################################################
 
     Sub New(ByVal Creater As clsEditor)
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsCanvas", "New")
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsCanvas", "New")
 
         _creater = Creater
         With _screen
@@ -26,7 +26,7 @@
             .Dock = DockStyle.Fill
         End With
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsCanvas", "New") : frmMain.DebugPrefix -= 1
+        clsProgramm.DebugPrefix -= 1
     End Sub
     '####################################################################################################
     'Methoden

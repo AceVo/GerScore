@@ -19,7 +19,7 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
         Dim _name As String = Part.Name
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         _part = Part
         _editor = Editor
@@ -38,7 +38,7 @@
             _editor.Layertree.Nodes(_part.Level).Checked = True
         End If
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -46,7 +46,7 @@
     '####################################################################################################
 
     Overrides Sub Dispose(ByVal disposing As Boolean)
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorPart", "Dispose")
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorPart", "Dispose")
         If Not disposing Then
             _part = Nothing
             _sc.Parent = Nothing
@@ -55,7 +55,7 @@
             _editor = Nothing
             _disposed = True
         End If
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorPart", "Dispose") : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsEditorPart", "Dispose") : clsProgramm.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################

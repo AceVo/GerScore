@@ -4,9 +4,21 @@
     'Deklaration
     '####################################################################################################
 
+    Private _className As String = "xxx"
+
     '####################################################################################################
     'Konstruktoren
     '####################################################################################################
+
+    Public Sub New()
+        Dim _type As String = "Sub"
+        Dim _structname As String = "New"
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+
+
+
+        clsProgramm.DebugPrefix -= 1
+    End Sub
 
     '####################################################################################################
     'Methoden
