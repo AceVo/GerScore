@@ -2,8 +2,6 @@
 
     Private _className As String = "clsPart"
 
-    <NonSerialized> Private Main As clsMainController = clsProgramm.MainController
-
     Private _name As String
     Private _gerber As New List(Of clsGerber)
 
@@ -63,7 +61,7 @@
 
     ReadOnly Property Level As Integer
         Get
-            Return Main.Project.Parts.IndexOf(Me)
+            Return clsProgramm.MainController.Project.Parts.IndexOf(Me)
         End Get
     End Property
 

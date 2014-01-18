@@ -15,6 +15,8 @@ Public Class clsMainController
 
     Private Event ProjectInit()
 
+    Friend Event ProjectSaved()
+
     '####################################################################################################
     'Konstruktoren
     '####################################################################################################
@@ -163,11 +165,31 @@ Public Class clsMainController
         Dim _structname As String = "Project_Save"
         clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
-        If SaveAtPath Then
-            _project.Save(Project.Path)
-        Else
-            _project.Save()
-        End If
+        Dim Path As String
+        Dim fs As FileStream
+
+        With _mainform
+            If SaveAtPath Then
+                Path = _project.Path
+            Else
+                .dlgSave.Filter = "GerSCore Projekte (*.gsProj)|*.gsProj"
+                If IO.Directory.Exists(My.Settings.RecentPath) Then .dlgSave.InitialDirectory = My.Settings.RecentPath
+                If .dlgSave.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Path = .dlgSave.FileName
+                Else
+                    Exit Sub
+                End If
+            End If
+            Dim bf As New System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            fs = New FileStream(Path, FileMode.Create)
+            Debug.Print(Path.ToString)
+            bf.Serialize(fs, _project)
+            Debug.Print("gespeichert")
+            fs.Close()
+            My.Settings.RecentPath = Path
+            '_path = Path
+            RaiseEvent ProjectSaved()
+        End With
 
         clsProgramm.DebugPrefix -= 1
     End Sub
@@ -184,7 +206,6 @@ Public Class clsMainController
             _mainform.SpeichernToolStripMenuItem.Enabled = True
         End If
 
-
         clsProgramm.DebugPrefix -= 1
     End Sub
 
@@ -195,7 +216,7 @@ Public Class clsMainController
         clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Project_Open(CType(Sender, ToolStripMenuItem).Text)
-        'RaiseEvent ProjectInit()
+        RaiseEvent ProjectInit()
 
         clsProgramm.DebugPrefix -= 1
     End Sub
@@ -229,8 +250,6 @@ Public Class clsMainController
         Dim _type As String = "Event"
         Dim _structname As String = "Tests_init"
         clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
-
-        '_mainform.NeuToolStripMenuItem.PerformClick()
 
         Project.AddPart("Testpart1")
         Project.AddPart("Testpart2")

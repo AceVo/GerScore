@@ -25,7 +25,4 @@
 
     End Sub
 
-    Private Sub Init()
-    End Sub
-
 End Class

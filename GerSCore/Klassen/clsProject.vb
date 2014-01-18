@@ -7,11 +7,11 @@
     Private _name As String
     Private _saved As Boolean = False
     <NonSerialized> Private _path As String
+    <NonSerialized> Private WithEvents _controller As clsMainController
 
     Friend Parts As New List(Of clsPart)
 
     Private Event Loaded()
-    Private Event Saved()
     Private Event Created()
     <NonSerialized> Friend Event SaveStatusChanged()
     <NonSerialized> Friend Event NameChanged()
@@ -29,6 +29,7 @@
         clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Project_initiated()
+
         Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
     End Sub
 
@@ -37,13 +38,10 @@
         Dim _structname As String = "Project_initiated"
         clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
-        'frmMain.DatenToolStripMenuItem.Enabled = True
-        'frmMain.pnlProjekt.Visible = True
-        'frmMain.SpeichernunterToolStripMenuItem.Enabled = True
+        _controller = clsProgramm.MainController
 
         If Loaded Then
-            frmMain.SpeichernToolStripMenuItem.Enabled = True
-            _path = My.Settings.RecentPath
+            clsProgramm.MainForm.SpeichernToolStripMenuItem.Enabled = True
             RaiseEvent Loaded()
         Else
             RaiseEvent Created()
@@ -66,29 +64,7 @@
 
         RaiseEvent PartAdded()
 
-        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2) : clsProgramm.DebugPrefix -= 1
-    End Sub
-
-    Friend Sub Save(Optional ByVal Path As String = "")
-        Dim fs As FileStream
-        With frmMain
-            If Path = "" Then
-                .dlgSave.Filter = "GerSCore Projekte (*.gsProj)|*.gsProj"
-                If IO.Directory.Exists(My.Settings.RecentPath) Then .dlgSave.InitialDirectory = My.Settings.RecentPath
-                If .dlgSave.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                    Path = .dlgSave.FileName
-                End If
-            End If
-            Dim bf As New System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            fs = New FileStream(Path, FileMode.Create)
-            Debug.Print(Path.ToString)
-            bf.Serialize(fs, Me)
-            Debug.Print("gespeichert")
-            fs.Close()
-            My.Settings.RecentPath = Path
-            _path = Path
-            RaiseEvent Saved()
-        End With
+        clsProgramm.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -115,7 +91,6 @@
             Return _path
         End Get
     End Property
-
 
     ''' <summary>
     ''' Project Singleton Instance
@@ -144,20 +119,26 @@
     '####################################################################################################
 
     Private Sub Project_edited() Handles Me.NameChanged, Me.PartAdded, Me.Created
+        Dim _type As String = "Event"
+        Dim _structname As String = "Project_edited"
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+
         _saved = False
         RaiseEvent SaveStatusChanged()
+
+        clsProgramm.DebugPrefix -= 1
     End Sub
 
-    Private Sub Project_save() Handles Me.Saved, Me.Loaded
+    Private Sub Project_save() Handles Me.Loaded, _controller.ProjectSaved
+        Dim _type As String = "Event"
+        Dim _structname As String = "Project_save"
+        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+
         _saved = True
+        _path = My.Settings.RecentPath
         RaiseEvent SaveStatusChanged()
-    End Sub
 
-    'Private Sub Title_update() Handles Me.SaveStatusChanged
-    '    frmMain.Text = "GerScore - Gerber Shift Correction - " & Me.Name
-    '    If Not _saved Then
-    '        frmMain.Text = frmMain.Text & "*"
-    '    End If
-    'End Sub
+        clsProgramm.DebugPrefix -= 1
+    End Sub
 
 End Class
