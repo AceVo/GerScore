@@ -18,24 +18,24 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New(Parent)"
         _name = InputBox("Bezeichnung des Gerbers eingeben", "Gerbername")
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         _parent = Parent
         Call Me.init() 'Anweisung für alle Konstruktoren gültig
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgram.DebugPrefix -= 1
     End Sub
 
     Public Sub New(ByVal Name As String, ByRef Parent As clsPart)
         Dim _type As String = "Sub"
         Dim _structname As String = "New(Name, Parent)"
         Me.Name = Name
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         _parent = Parent
         Call Me.init() 'Anweisung für alle Konstruktoren gültig
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub init()
@@ -44,11 +44,11 @@
         ' *****************************************************
         Dim _type As String = "Sub"
         Dim _structname As String = "init"
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Me.Color = RandomColor()
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -69,7 +69,7 @@
         '   ja, die Funktion erneut aufgerufen
         '****************************************************************************************************
 
-        Dim farbe As Color = Color.FromName([Enum].GetNames(GetType(KnownColor))(frmMain.rnd.Next(28, 167)))
+        Dim farbe As Color = Color.FromName([Enum].GetNames(GetType(KnownColor))(clsProgram.MainController.rnd.Next(28, 167)))
         If frmMain.UsedColor.Contains(farbe) Then
             farbe = RandomColor()
         End If

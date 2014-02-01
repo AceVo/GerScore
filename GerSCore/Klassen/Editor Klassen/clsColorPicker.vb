@@ -44,7 +44,7 @@
     Protected Overloads Sub Dispose(ByVal disposing As Boolean)
         Dim _type As String = "Sub"
         Dim _structname As String = "Dispose"
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _classname, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _classname, _type, _structname)
 
         If Not disposing Then
             Me.Parent.Shapes.Remove(Me)
@@ -54,7 +54,7 @@
             _disposed = True
         End If
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2}", _classname, _type, _structname) : frmMain.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################

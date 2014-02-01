@@ -66,13 +66,13 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property RecentProjects() As Global.System.Collections.Specialized.StringCollection
             Get
-                Return CType(Me("RecentProjects"), Global.System.Collections.Specialized.StringCollection)
+                Return CType(Me("RecentProjects"),Global.System.Collections.Specialized.StringCollection)
             End Get
-            Set(value As Global.System.Collections.Specialized.StringCollection)
+            Set
                 Me("RecentProjects") = value
             End Set
         End Property

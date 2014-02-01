@@ -1,10 +1,10 @@
 ﻿Public Class frmPartlist
 
     Private Sub frmPartlist_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If frmMain.Project Is Nothing Then
+        If clsProgram.MainController.Project Is Nothing Then
             Me.Text = "Gerber Shift Correction"
         Else
-            Me.Text = "Gerber Shift Correction - Part Bibliothek - Part Liste - " & frmMain.Project.Name
+            Me.Text = "Gerber Shift Correction - Part Bibliothek - Part Liste - " & clsProgram.MainController.Project.Name
         End If
     End Sub
 

@@ -14,13 +14,13 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
         Dim _name = Parent.Name
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4} : {5}", _className, _type, _structname, _name, StartPoint, EndPoint)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4} : {5}", _className, _type, _structname, _name, StartPoint, EndPoint)
 
         Me.Parent = Parent
         Me.StartPoint = StartPoint
         Me.EndPoint = EndPoint
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : frmMain.DebugPrefix -= 1
+        Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
