@@ -1,10 +1,11 @@
-﻿Public Class clsEditorItem
-
+﻿<Serializable> Public MustInherit Class clsEditorItem
+    Implements IDisposable
     '####################################################################################################
     'Deklaration
     '####################################################################################################
 
     Protected _editor As clsEditor
+    Protected Friend _disposed As Boolean = False
 
     '####################################################################################################
     'Konstruktoren
@@ -13,6 +14,11 @@
     '####################################################################################################
     'Methoden
     '####################################################################################################
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Dispose(_disposed)
+    End Sub
+
+    MustOverride Sub Dispose(ByVal disposing As Boolean)
 
     '####################################################################################################
     'Funktionen

@@ -1,4 +1,7 @@
-﻿Public Class clsPart
+﻿<Serializable> Public Class clsPart
+
+    Private _className As String = "clsPart"
+
     Private _name As String
     Private _gerber As New List(Of clsGerber)
 
@@ -7,15 +10,27 @@
     '####################################################################################################
 
     Public Sub New(ByVal Name As String)
+        Dim _type As String = "Sub"
+        Dim _structname As String = "New"
         _name = Name
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
     'Methoden
     '####################################################################################################
 
-    Public Sub AddGerber(ByVal Name As String, ByRef Parent As clsPart)
-        Me.Gerber.Add(New clsGerber(Name, Parent))
+    Public Sub AddGerber(ByVal Name As String)
+        Dim _type As String = "Sub"
+        Dim _structname As String = "AddGerber"
+        Dim _name2 = Name
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
+
+        Me.Gerber.Add(New clsGerber(Name, Me))
+
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -46,7 +61,7 @@
 
     ReadOnly Property Level As Integer
         Get
-            Return frmMain.Project.Parts.IndexOf(Me)
+            Return clsProgram.MainController.Project.Parts.IndexOf(Me)
         End Get
     End Property
 

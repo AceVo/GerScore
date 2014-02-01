@@ -1,6 +1,6 @@
 ﻿Public Class clsCanvas
     Inherits PictureBox
-
+    Implements IDisposable
 
     '####################################################################################################
     'Deklaration
@@ -16,7 +16,7 @@
     '####################################################################################################
 
     Sub New(ByVal Creater As clsEditor)
-        frmMain.DebugPrefix += 1 : Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsCanvas", "New")
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsCanvas", "New")
 
         _creater = Creater
         With _screen
@@ -26,7 +26,7 @@
             .Dock = DockStyle.Fill
         End With
 
-        Debug.Print(StrDup(frmMain.DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "clsCanvas", "New") : frmMain.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
     '####################################################################################################
     'Methoden
@@ -215,5 +215,10 @@
     Friend Sub clsCanvas_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
         WriteCoordinates()
         _creater.Statusline.Text = sender.ToString
+    End Sub
+
+    Protected Overrides Sub Finalize()
+        Debug.Print("clsCanvas Finalize")
+        MyBase.Finalize()
     End Sub
 End Class

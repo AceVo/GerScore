@@ -1,17 +1,62 @@
 ﻿Public Class frmMain
 
-    Private Shared _project As clsProjekt
-    Private Shared _usedcolors As New List(Of Color)
-    Public DebugPrefix As Integer = 0
-    Public rnd As New Random
+    '####################################################################################################
+    'Deklaration
+    '####################################################################################################
 
-    Public Shared ReadOnly Property Project As clsProjekt
-        Get
-            Return _project
-        End Get
-    End Property
+    Private _usedcolors As New List(Of Color)
+    Private WithEvents _controller As clsMainController = clsProgram.MainController
 
-    Public Shared Property UsedColor As List(Of Color)
+    Friend Event ProjectNewClick()
+    Friend Event ProjectOpenClick()
+    Friend Event ProjectSaveClick(ByVal SaveAtPath As Boolean)
+
+    Friend Event PartAddClick()
+
+    Friend Event PosListAddClick()
+    Friend Event PosListListEntryClick(sender As ListBox, e As EventArgs)
+    Friend Event PosListEntryAddClick()
+    Friend Event PosListCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
+    Friend Event PosListCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
+
+    Friend Event TestInitClick()
+
+    '####################################################################################################
+    'Konstruktoren
+    '####################################################################################################
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        ' Form generell
+        BackColor = clsProgram.FhgGreenLight
+        MnuStrMain.BackColor = clsProgram.FhGGreen
+        ' Projekt Panel
+        pnlProjekt.BackColor = clsProgram.FhGGreen
+        lblProjectName.ForeColor = clsProgram.FhGGreenVeryLight
+        SplitContainer1.IsSplitterFixed = True
+        '   Overview
+        tbpOverview.BackColor = clsProgram.FhGGreen
+        lsbParts.BackColor = clsProgram.FhgGreenLight
+        '   Positionlists
+        tbpPosList.BackColor = clsProgram.FhGGreen
+        dgvPosList.BackgroundColor = clsProgram.FhgGreenLight
+        btnAddPosition.BackColor = clsProgram.FhGGreenVeryLight
+
+    End Sub
+
+    '####################################################################################################
+    'Methoden
+    '####################################################################################################
+
+    '####################################################################################################
+    'Funktionen
+    '####################################################################################################
+
+    '####################################################################################################
+    'Property
+    '####################################################################################################
+
+    Friend Property UsedColor As List(Of Color)
         Get
             Return _usedcolors
         End Get
@@ -20,14 +65,12 @@
         End Set
     End Property
 
-    Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Debug.Print(StrDup(75, "-"))
-        DebugPrefix += 1 : Debug.Print(StrDup(DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "frmMain", "Load")
+    '####################################################################################################
+    'Events
+    '####################################################################################################
 
-        Randomize()
-        Titel_aktualisieren()
-
-        Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Load") : DebugPrefix -= 1
+    Private Sub PartBibliothekToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PartBibliothekToolStripMenuItem.Click
+        frmPartLib.ShowDialog()
     End Sub
 
     Private Sub BeendenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BeendenToolStripMenuItem.Click
@@ -35,60 +78,73 @@
     End Sub
 
     Private Sub NeuToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NeuToolStripMenuItem.Click
-        _project = New clsProjekt
-        Titel_aktualisieren()
+        RaiseEvent ProjectNewClick()
     End Sub
 
-    Public Sub Titel_aktualisieren()
-        If _project Is Nothing Then
-            Me.Text = "Gerber Shift Correction"
-        Else
-            Me.Text = "Gerber Shift Correction - " & _project.Name
-        End If
+    Private Sub SpeichernToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeichernToolStripMenuItem.Click
+        RaiseEvent ProjectSaveClick(True)
     End Sub
 
-    Private Sub PartBibliothekToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PartBibliothekToolStripMenuItem.Click
-        frmPartLib.ShowDialog()
+    Private Sub SpeichernunterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeichernunterToolStripMenuItem.Click
+        RaiseEvent ProjectSaveClick(False)
     End Sub
 
-    Private Sub Tests_init()
-        DebugPrefix += 1 : Debug.Print(StrDup(DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "frmMain", "Tests_init")
+    Private Sub TestsInitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestsInitToolStripMenuItem.Click
+        RaiseEvent TestInitClick()
+    End Sub
 
-        Me.NeuToolStripMenuItem.PerformClick()
+    Private Sub ÖffnenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÖffnenToolStripMenuItem.Click
+        RaiseEvent ProjectOpenClick()
+    End Sub
 
-        Project.AddPart("Testpart1")
-        Project.AddPart("Testpart2")
-        Project.AddPart("Testpart3")
-        Project.Parts(0).AddGerber("Testgerber1", Project.Parts(0))
-        Project.Parts(0).AddGerber("Testgerber2", Project.Parts(0))
-        Project.Parts(1).AddGerber("Testgerber1", Project.Parts(1))
-        Project.Parts(1).AddGerber("Testgerber2", Project.Parts(1))
-        Project.Parts(2).AddGerber("Testgerber1", Project.Parts(2))
-        Project.Parts(2).AddGerber("Testgerber2", Project.Parts(2))
+    Private Sub SplitContainer1_SizeChanged(sender As Object, e As EventArgs) Handles SplitContainer1.SizeChanged
+        lblProjectName.Location = New Point(CInt((SplitContainer1.Width / 2) - (lblProjectName.Width / 2)), _
+                            CInt((SplitContainer1.Panel1.Height / 2) - (lblProjectName.Height / 2)))
+    End Sub
 
-        Project.Parts(0).Gerber(0).Shapes.Add(New clsLine(Project.Parts(0).Gerber(0), New Point(10, 10), New Point(850 - 30, 500)))
-        Project.Parts(0).Gerber(0).Shapes.Add(New clsLine(Project.Parts(0).Gerber(0), New Point(0, 0), New Point(935, 0)))
-        Project.Parts(0).Gerber(0).Shapes.Add(New clsLine(Project.Parts(0).Gerber(0), New Point(0, 0), New Point(0, 508)))
-        Project.Parts(0).Gerber(0).Shapes.Add(New clsLine(Project.Parts(0).Gerber(0), New Point(0, 0), New Point(939, 514)))
-        Project.Parts(0).Gerber(0).Shapes.Add(New clsLine(Project.Parts(0).Gerber(0), New Point(0, 514), New Point(939, 0)))
-        Project.Parts(0).Gerber(1).Shapes.Add(New clsLine(Project.Parts(0).Gerber(1), New Point(60, 10), New Point(850 - 60, 500)))
-        Project.Parts(1).Gerber(0).Shapes.Add(New clsLine(Project.Parts(1).Gerber(0), New Point(90, 10), New Point(850 - 90, 500)))
-        Project.Parts(1).Gerber(1).Shapes.Add(New clsLine(Project.Parts(1).Gerber(1), New Point(120, 10), New Point(850 - 120, 500)))
-        Project.Parts(2).Gerber(0).Shapes.Add(New clsLine(Project.Parts(2).Gerber(0), New Point(150, 10), New Point(850 - 150, 500)))
-        Project.Parts(2).Gerber(1).Shapes.Add(New clsLine(Project.Parts(2).Gerber(1), New Point(180, 10), New Point(850 - 180, 500)))
+    Private Sub PartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PartToolStripMenuItem.Click
+        RaiseEvent PartAddClick()
+    End Sub
 
-        Me.PartBibliothekToolStripMenuItem.PerformClick()
+    Private Sub PositionslisteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PositionslisteToolStripMenuItem.Click
+        RaiseEvent PosListAddClick()
+    End Sub
 
-        Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Tests_init") : DebugPrefix -= 1
+    Private Sub btnAddPosition_Click(sender As Object, e As EventArgs) Handles btnAddPosition.Click
+        RaiseEvent PosListEntryAddClick()
+    End Sub
+
+    Private Sub lsbPosLists_Click(sender As Object, e As EventArgs) Handles lsbPosLists.Click
+        RaiseEvent PosListListEntryClick(CType(sender, ListBox), e)
+    End Sub
+
+    Private Sub CellTemplates() Handles dgvPosList.DataSourceChanged
+
+        Dim PosCell As DataGridViewCell = New DataGridViewTextBoxCell
+        Dim AngleCell As DataGridViewCell = New DataGridViewTextBoxCell
+        Dim Project As clsProjekt = clsProgram.MainController.Project
+        Dim CurrentTable As DataTable = Project.PositionLists(Project.PositionLists.IndexOf(CType(dgvPosList.DataSource, clsPosList)))
+
+        PosCell.Style.Format = "#0.000 mm"
+        AngleCell.Style.Format = "#0.00 °"
+
+
+        dgvPosList.Columns(1).CellTemplate = PosCell
+        dgvPosList.Columns(2).CellTemplate = PosCell
+        dgvPosList.Columns(3).CellTemplate = AngleCell
+
+        For Each Element As DataGridViewColumn In dgvPosList.Columns
+            Element.HeaderText = CurrentTable.Columns(Element.Index).Caption
+        Next
 
     End Sub
 
-    Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        DebugPrefix += 1 : Debug.Print(StrDup(DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "frmMain", "Shown")
+    Private Sub dgvPosList_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles dgvPosList.CellBeginEdit
+        RaiseEvent PosListCellBeginEdit(sender, e)
+    End Sub
 
-        Tests_init()
-
-        Debug.Print(StrDup(DebugPrefix, "+") & " " & "Leave in: {0} Sub ->  {1}", "frmMain", "Shown") : DebugPrefix -= 1
+    Private Sub dgvPosList_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPosList.CellEndEdit
+        RaiseEvent PosListCellEndEdit(sender, e)
     End Sub
 
 End Class

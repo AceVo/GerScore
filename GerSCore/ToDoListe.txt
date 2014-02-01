@@ -1,5 +1,28 @@
 ﻿############## Wichtig
 
+	+ Generell
+		+ Im Hauptbildschirm Übersicht über das Projekt anzeigen
+			+ Name
+			+ Enthaltene Parts
+				+ Enthaltene Gerber
+			+ Tabellarische Übersicht über die Bestückliste
+			+ Grafische Übersicht über die Bestückliste	-> Editor verwendet
+		+ Speichern einzelner Parts
+		+ Exportieren von Parts
+		+ Importieren von Parts
+		+ Exportieren von Gerber
+		+ Importieren von Gerber
+	+ Projekt
+		+ Einfügen von Modulen, die mehrere Parts (gleiche/unterschiedliche) beinhalten können
+		+ Bestückliste einbauen
+		+ Bestücklisten aus ASCII Daten importieren -> mit Templates
+		+ Bestücklisten generieren können, aus Step & Repeat & Anfangsposition (Absolut & Referenziert)
+		+ Bestücklisten Exportieren
+			+ für Impex
+			+ für Mahr
+			+ in SiPlace Format
+			+ in Datacon Format
+			+ in beliebigem Format
 	+ Editor
 		+ Shapes fangen
 			- per Taste ein- und ausschalten können
@@ -15,7 +38,6 @@
 	+ Einheit einführen
 		- umschalten zwischen metrisch/insch
 		- verschiedene Auflösungen
-	+ Gerber Importieren
 	+ "Junctionpoints" implementieren
 	+ "Junctionlines" implementieren
 
@@ -32,6 +54,9 @@
 
 
 #### erledigt!
+
+	+ Generell
+		+ Speichern vom Projekt																											14.01.2014
 
 	+ aktuelle Koordinaten des Cursors anzeigen
 		- Mausposition über Shapes sind falsch
