@@ -18,7 +18,7 @@
     Private tslStatusLabel As New ToolStripStatusLabel
     Private tslMousePos As New ToolStripStatusLabel
 
-    Private _project As clsProjekt = clsProgramm.MainController.Project
+    Private _project As clsProjekt = clsProgram.MainController.Project
     Private _backcolor As Color
     Private _target As Control
     Private _layerviewer As Boolean
@@ -36,7 +36,7 @@
     Sub New(ByVal Target As Control, Optional ByVal LayerViewer As Boolean = True)
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
 
         _target = Target
         _layerviewer = LayerViewer
@@ -155,7 +155,7 @@
         Daten_einlesen()
         Canvas.Screen.Location = New Point(0, 0)
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -165,7 +165,7 @@
     Private Sub Daten_einlesen()
         Dim _type As String = "Sub"
         Dim _structname As String = "Daten_einlesen"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
         For Each Part As clsPart In _project.Parts
             Dim EditorPart As New clsEditorPart(Part, Me)
             For Each Gerber As clsGerber In Part.Gerber
@@ -175,7 +175,7 @@
 
         If _layerviewer Then trvLayer.ExpandAll()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub DrawMousePointer() Handles Me.CursorChanged
@@ -208,7 +208,7 @@
     Protected Sub Dispose(ByVal disposing As Boolean)
         Dim _type As String = "Sub"
         Dim _structname As String = "Dispose"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
 
 
         If Not disposing Then
@@ -241,7 +241,7 @@
             End If
             _disposed = True
         End If
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################

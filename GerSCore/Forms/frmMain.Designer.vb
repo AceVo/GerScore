@@ -55,26 +55,46 @@ Partial Class frmMain
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.InfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjektToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PartBibliothekToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TestsInitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HinzufügenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PositionslisteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlProjekt = New System.Windows.Forms.Panel()
-        Me.lstParts = New System.Windows.Forms.ListBox()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.lblProjectName = New System.Windows.Forms.Label()
+        Me.tbcMain = New System.Windows.Forms.TabControl()
+        Me.tbpOverview = New System.Windows.Forms.TabPage()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lsbParts = New System.Windows.Forms.ListBox()
+        Me.tbpPosList = New System.Windows.Forms.TabPage()
+        Me.lsbPosLists = New System.Windows.Forms.ListBox()
+        Me.btnAddPosition = New System.Windows.Forms.Button()
+        Me.dgvPosList = New System.Windows.Forms.DataGridView()
         Me.dlgColor = New System.Windows.Forms.ColorDialog()
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
         Me.MnuStrMain.SuspendLayout()
         Me.pnlProjekt.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
+        Me.tbcMain.SuspendLayout()
+        Me.tbpOverview.SuspendLayout()
+        Me.tbpPosList.SuspendLayout()
+        CType(Me.dgvPosList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MnuStrMain
         '
         Me.MnuStrMain.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.MnuStrMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateiToolStripMenuItem, Me.BearbeitenToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.HilfeToolStripMenuItem, Me.DatenToolStripMenuItem})
+        Me.MnuStrMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateiToolStripMenuItem, Me.BearbeitenToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.HilfeToolStripMenuItem, Me.DatenToolStripMenuItem, Me.HinzufügenToolStripMenuItem})
         Me.MnuStrMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuStrMain.Name = "MnuStrMain"
-        Me.MnuStrMain.Size = New System.Drawing.Size(1187, 24)
+        Me.MnuStrMain.Size = New System.Drawing.Size(1161, 24)
         Me.MnuStrMain.TabIndex = 0
         Me.MnuStrMain.Text = "Hauptmenü Streifen"
         '
@@ -244,13 +264,13 @@ Partial Class frmMain
         'AnpassenToolStripMenuItem
         '
         Me.AnpassenToolStripMenuItem.Name = "AnpassenToolStripMenuItem"
-        Me.AnpassenToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.AnpassenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AnpassenToolStripMenuItem.Text = "&Anpassen"
         '
         'OptionenToolStripMenuItem
         '
         Me.OptionenToolStripMenuItem.Name = "OptionenToolStripMenuItem"
-        Me.OptionenToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
+        Me.OptionenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OptionenToolStripMenuItem.Text = "&Optionen"
         '
         'HilfeToolStripMenuItem
@@ -265,42 +285,49 @@ Partial Class frmMain
         'InhaltToolStripMenuItem
         '
         Me.InhaltToolStripMenuItem.Name = "InhaltToolStripMenuItem"
-        Me.InhaltToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.InhaltToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.InhaltToolStripMenuItem.Text = "I&nhalt"
         '
         'IndexToolStripMenuItem
         '
         Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
-        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.IndexToolStripMenuItem.Text = "&Index"
         '
         'SuchenToolStripMenuItem
         '
         Me.SuchenToolStripMenuItem.Name = "SuchenToolStripMenuItem"
-        Me.SuchenToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.SuchenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SuchenToolStripMenuItem.Text = "&Suchen"
         '
         'toolStripSeparator5
         '
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        Me.toolStripSeparator5.Size = New System.Drawing.Size(110, 6)
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(149, 6)
         '
         'InfoToolStripMenuItem
         '
         Me.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
-        Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
+        Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.InfoToolStripMenuItem.Text = "Inf&o..."
         '
         'DatenToolStripMenuItem
         '
-        Me.DatenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProjektToolStripMenuItem, Me.PartBibliothekToolStripMenuItem, Me.TestsInitToolStripMenuItem})
+        Me.DatenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem, Me.ProjektToolStripMenuItem, Me.PartBibliothekToolStripMenuItem, Me.TestsInitToolStripMenuItem})
         Me.DatenToolStripMenuItem.Enabled = False
         Me.DatenToolStripMenuItem.Name = "DatenToolStripMenuItem"
         Me.DatenToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.DatenToolStripMenuItem.Text = "&Daten"
         '
+        'ToolStripMenuItem
+        '
+        Me.ToolStripMenuItem.Name = "ToolStripMenuItem"
+        Me.ToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.ToolStripMenuItem.Text = "ToolStripMenuItem1"
+        '
         'ProjektToolStripMenuItem
         '
+        Me.ProjektToolStripMenuItem.Enabled = False
         Me.ProjektToolStripMenuItem.Name = "ProjektToolStripMenuItem"
         Me.ProjektToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.ProjektToolStripMenuItem.Text = "Projekt Eigenschaften..."
@@ -317,37 +344,152 @@ Partial Class frmMain
         Me.TestsInitToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.TestsInitToolStripMenuItem.Text = "Tests init"
         '
+        'HinzufügenToolStripMenuItem
+        '
+        Me.HinzufügenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PartToolStripMenuItem, Me.PositionslisteToolStripMenuItem})
+        Me.HinzufügenToolStripMenuItem.Enabled = False
+        Me.HinzufügenToolStripMenuItem.Name = "HinzufügenToolStripMenuItem"
+        Me.HinzufügenToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
+        Me.HinzufügenToolStripMenuItem.Text = "Hinzufügen..."
+        '
+        'PartToolStripMenuItem
+        '
+        Me.PartToolStripMenuItem.Name = "PartToolStripMenuItem"
+        Me.PartToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PartToolStripMenuItem.Text = "Part"
+        '
+        'PositionslisteToolStripMenuItem
+        '
+        Me.PositionslisteToolStripMenuItem.Name = "PositionslisteToolStripMenuItem"
+        Me.PositionslisteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PositionslisteToolStripMenuItem.Text = "Positionsliste"
+        '
         'pnlProjekt
         '
-        Me.pnlProjekt.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(162, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.pnlProjekt.Controls.Add(Me.lstParts)
-        Me.pnlProjekt.Controls.Add(Me.lblProjectName)
+        Me.pnlProjekt.BackColor = System.Drawing.Color.LightSeaGreen
+        Me.pnlProjekt.Controls.Add(Me.SplitContainer1)
         Me.pnlProjekt.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProjekt.Location = New System.Drawing.Point(0, 24)
         Me.pnlProjekt.Name = "pnlProjekt"
-        Me.pnlProjekt.Size = New System.Drawing.Size(1187, 647)
+        Me.pnlProjekt.Size = New System.Drawing.Size(1161, 549)
         Me.pnlProjekt.TabIndex = 1
         Me.pnlProjekt.Visible = False
         '
-        'lstParts
+        'SplitContainer1
         '
-        Me.lstParts.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.lstParts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstParts.FormattingEnabled = True
-        Me.lstParts.Location = New System.Drawing.Point(12, 66)
-        Me.lstParts.Name = "lstParts"
-        Me.lstParts.Size = New System.Drawing.Size(120, 93)
-        Me.lstParts.TabIndex = 1
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.lblProjectName)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.tbcMain)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1161, 549)
+        Me.SplitContainer1.SplitterDistance = 40
+        Me.SplitContainer1.TabIndex = 2
         '
         'lblProjectName
         '
         Me.lblProjectName.AutoSize = True
-        Me.lblProjectName.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProjectName.Location = New System.Drawing.Point(12, 12)
+        Me.lblProjectName.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProjectName.Location = New System.Drawing.Point(435, 6)
         Me.lblProjectName.Name = "lblProjectName"
-        Me.lblProjectName.Size = New System.Drawing.Size(180, 29)
+        Me.lblProjectName.Size = New System.Drawing.Size(194, 29)
         Me.lblProjectName.TabIndex = 0
         Me.lblProjectName.Text = "lblProjectName"
+        Me.lblProjectName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'tbcMain
+        '
+        Me.tbcMain.Alignment = System.Windows.Forms.TabAlignment.Bottom
+        Me.tbcMain.Controls.Add(Me.tbpOverview)
+        Me.tbcMain.Controls.Add(Me.tbpPosList)
+        Me.tbcMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tbcMain.Location = New System.Drawing.Point(0, 0)
+        Me.tbcMain.Multiline = True
+        Me.tbcMain.Name = "tbcMain"
+        Me.tbcMain.SelectedIndex = 0
+        Me.tbcMain.Size = New System.Drawing.Size(1161, 505)
+        Me.tbcMain.TabIndex = 2
+        '
+        'tbpOverview
+        '
+        Me.tbpOverview.BackColor = System.Drawing.Color.IndianRed
+        Me.tbpOverview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.tbpOverview.Controls.Add(Me.Label1)
+        Me.tbpOverview.Controls.Add(Me.lsbParts)
+        Me.tbpOverview.Location = New System.Drawing.Point(4, 4)
+        Me.tbpOverview.Name = "tbpOverview"
+        Me.tbpOverview.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpOverview.Size = New System.Drawing.Size(1153, 479)
+        Me.tbpOverview.TabIndex = 0
+        Me.tbpOverview.Text = "Übersicht"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(8, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(31, 13)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Parts"
+        '
+        'lsbParts
+        '
+        Me.lsbParts.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
+        Me.lsbParts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lsbParts.FormattingEnabled = True
+        Me.lsbParts.Location = New System.Drawing.Point(6, 39)
+        Me.lsbParts.Name = "lsbParts"
+        Me.lsbParts.SelectionMode = System.Windows.Forms.SelectionMode.None
+        Me.lsbParts.Size = New System.Drawing.Size(120, 93)
+        Me.lsbParts.TabIndex = 1
+        '
+        'tbpPosList
+        '
+        Me.tbpPosList.BackColor = System.Drawing.Color.Coral
+        Me.tbpPosList.Controls.Add(Me.lsbPosLists)
+        Me.tbpPosList.Controls.Add(Me.btnAddPosition)
+        Me.tbpPosList.Controls.Add(Me.dgvPosList)
+        Me.tbpPosList.Location = New System.Drawing.Point(4, 4)
+        Me.tbpPosList.Name = "tbpPosList"
+        Me.tbpPosList.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpPosList.Size = New System.Drawing.Size(1153, 479)
+        Me.tbpPosList.TabIndex = 1
+        Me.tbpPosList.Text = "Positionslisten"
+        '
+        'lsbPosLists
+        '
+        Me.lsbPosLists.FormattingEnabled = True
+        Me.lsbPosLists.Location = New System.Drawing.Point(8, 62)
+        Me.lsbPosLists.Name = "lsbPosLists"
+        Me.lsbPosLists.Size = New System.Drawing.Size(120, 95)
+        Me.lsbPosLists.TabIndex = 2
+        '
+        'btnAddPosition
+        '
+        Me.btnAddPosition.Location = New System.Drawing.Point(147, 33)
+        Me.btnAddPosition.Name = "btnAddPosition"
+        Me.btnAddPosition.Size = New System.Drawing.Size(117, 23)
+        Me.btnAddPosition.TabIndex = 1
+        Me.btnAddPosition.Text = "Position hinzufügen..."
+        Me.btnAddPosition.UseVisualStyleBackColor = True
+        '
+        'dgvPosList
+        '
+        Me.dgvPosList.AllowUserToAddRows = False
+        Me.dgvPosList.AllowUserToOrderColumns = True
+        Me.dgvPosList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPosList.Location = New System.Drawing.Point(147, 62)
+        Me.dgvPosList.Name = "dgvPosList"
+        Me.dgvPosList.Size = New System.Drawing.Size(940, 411)
+        Me.dgvPosList.TabIndex = 0
         '
         'dlgColor
         '
@@ -363,16 +505,26 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1187, 671)
+        Me.ClientSize = New System.Drawing.Size(1161, 573)
         Me.Controls.Add(Me.pnlProjekt)
         Me.Controls.Add(Me.MnuStrMain)
         Me.MainMenuStrip = Me.MnuStrMain
         Me.Name = "frmMain"
         Me.Text = "Gerber Shift Correction"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MnuStrMain.ResumeLayout(False)
         Me.MnuStrMain.PerformLayout()
         Me.pnlProjekt.ResumeLayout(False)
-        Me.pnlProjekt.PerformLayout()
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel1.PerformLayout()
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
+        Me.tbcMain.ResumeLayout(False)
+        Me.tbpOverview.ResumeLayout(False)
+        Me.tbpOverview.PerformLayout()
+        Me.tbpPosList.ResumeLayout(False)
+        CType(Me.dgvPosList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -417,6 +569,18 @@ Partial Class frmMain
     Friend WithEvents RecentProjectsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblProjectName As System.Windows.Forms.Label
     Friend WithEvents ProjektToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents lstParts As System.Windows.Forms.ListBox
+    Friend WithEvents lsbParts As System.Windows.Forms.ListBox
+    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+    Friend WithEvents tbcMain As System.Windows.Forms.TabControl
+    Friend WithEvents tbpOverview As System.Windows.Forms.TabPage
+    Friend WithEvents tbpPosList As System.Windows.Forms.TabPage
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HinzufügenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PositionslisteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnAddPosition As System.Windows.Forms.Button
+    Friend WithEvents dgvPosList As System.Windows.Forms.DataGridView
+    Friend WithEvents lsbPosLists As System.Windows.Forms.ListBox
 
 End Class

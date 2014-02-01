@@ -22,7 +22,7 @@
 
     Sub New(ByRef Gerber As clsGerber, ByVal Editor As clsEditor, _
             ByVal StartPoint_w_Unit As Point, ByVal EndPoint_w_Unit As Point, Optional ByVal Unit As String = "mm")
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsDrawLine", "New")
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsDrawLine", "New")
 
         Me.Gerber = Gerber
         Me.UStartPoint = StartPoint_w_Unit
@@ -35,7 +35,7 @@
 
         Me.init()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -43,7 +43,7 @@
     '####################################################################################################
 
     Private Sub init()
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsDrawLine", "init")
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsDrawLine", "init")
 
         Me.BorderColor = Me.Color
         Me.BorderStyle = Drawing2D.DashStyle.Solid
@@ -51,7 +51,7 @@
         AddHandler Me.MouseMove, AddressOf _canvas.clsCanvas_MouseMove
         AddHandler Me.MouseLeave, AddressOf _canvas.clsCanvas_MouseLeave
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub calc_snappoints() Handles Me.StartPointChanged, Me.EndPointChanged
@@ -73,7 +73,7 @@
     Protected Overloads Sub Dispose(ByVal disposing As Boolean)
         Dim _type As String = "Sub"
         Dim _structname As String = "Dispose"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _classname, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _classname, _type, _structname)
 
         If Not disposing Then
             _snappoints = Nothing
@@ -87,7 +87,7 @@
 
         Me.Events.Dispose()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################

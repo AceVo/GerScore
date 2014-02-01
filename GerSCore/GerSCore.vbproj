@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DD3A5311-49F0-4B54-808C-BF74B71BDD60}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>GerSCore.clsProgramm</StartupObject>
+    <StartupObject>GerSCore.clsProgram</StartupObject>
     <RootNamespace>GerSCore</RootNamespace>
     <AssemblyName>GerSCore</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -42,6 +42,7 @@
     <NoWarn>
     </NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -100,6 +101,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Klassen\clsMainController.vb" />
+    <Compile Include="Klassen\clsMainController_TabOverview.vb" />
+    <Compile Include="Klassen\clsMainController_TabPosLists.vb" />
+    <Compile Include="Klassen\clsPosition.vb" />
+    <Compile Include="Klassen\clsPosList.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Klassen\clsPosListItem.vb" />
     <Compile Include="Klassen\clsProgramm.vb" />
     <Compile Include="Klassen\Editor Klassen\clsCanvas.vb">
       <SubType>Component</SubType>

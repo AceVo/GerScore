@@ -1,6 +1,6 @@
 ﻿Public Class frmPartLib
     Private _editor As clsEditor
-    Private Main As clsMainController = clsProgramm.MainController
+    Private Main As clsMainController = clsProgram.MainController
 
     Private Sub frmPartLib_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -12,7 +12,7 @@
         If Main.Project Is Nothing Then
             Me.Text = "Gerber Shift Correction"
         Else
-            Me.Text = "Gerber Shift Correction - Part Bibliothek - " & clsProgramm.MainController.Project.Name
+            Me.Text = "Gerber Shift Correction - Part Bibliothek - " & clsProgram.MainController.Project.Name
         End If
     End Sub
 

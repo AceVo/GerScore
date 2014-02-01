@@ -5,15 +5,44 @@
     '####################################################################################################
 
     Private _usedcolors As New List(Of Color)
+    Private WithEvents _controller As clsMainController = clsProgram.MainController
 
-    Friend Event ProjectNew()
-    Friend Event ProjectOpen()
-    Friend Event ProjectSave(ByVal SaveAtPath As Boolean)
-    Friend Event TestInit()
+    Friend Event ProjectNewClick()
+    Friend Event ProjectOpenClick()
+    Friend Event ProjectSaveClick(ByVal SaveAtPath As Boolean)
+
+    Friend Event PartAddClick()
+
+    Friend Event PosListAddClick()
+    Friend Event PosListListEntryClick(sender As ListBox, e As EventArgs)
+    Friend Event PosListEntryAddClick()
+    Friend Event PosListCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
+    Friend Event PosListCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
+
+    Friend Event TestInitClick()
 
     '####################################################################################################
     'Konstruktoren
     '####################################################################################################
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        ' Form generell
+        BackColor = clsProgram.FhgGreenLight
+        MnuStrMain.BackColor = clsProgram.FhGGreen
+        ' Projekt Panel
+        pnlProjekt.BackColor = clsProgram.FhGGreen
+        lblProjectName.ForeColor = clsProgram.FhGGreenVeryLight
+        SplitContainer1.IsSplitterFixed = True
+        '   Overview
+        tbpOverview.BackColor = clsProgram.FhGGreen
+        lsbParts.BackColor = clsProgram.FhgGreenLight
+        '   Positionlists
+        tbpPosList.BackColor = clsProgram.FhGGreen
+        dgvPosList.BackgroundColor = clsProgram.FhgGreenLight
+        btnAddPosition.BackColor = clsProgram.FhGGreenVeryLight
+
+    End Sub
 
     '####################################################################################################
     'Methoden
@@ -49,23 +78,73 @@
     End Sub
 
     Private Sub NeuToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NeuToolStripMenuItem.Click
-        RaiseEvent ProjectNew()
+        RaiseEvent ProjectNewClick()
     End Sub
 
     Private Sub SpeichernToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeichernToolStripMenuItem.Click
-        RaiseEvent ProjectSave(True)
+        RaiseEvent ProjectSaveClick(True)
     End Sub
 
     Private Sub SpeichernunterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SpeichernunterToolStripMenuItem.Click
-        RaiseEvent ProjectSave(False)
+        RaiseEvent ProjectSaveClick(False)
     End Sub
 
     Private Sub TestsInitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestsInitToolStripMenuItem.Click
-        RaiseEvent TestInit()
+        RaiseEvent TestInitClick()
     End Sub
 
     Private Sub ÖffnenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÖffnenToolStripMenuItem.Click
-        RaiseEvent ProjectOpen()
+        RaiseEvent ProjectOpenClick()
+    End Sub
+
+    Private Sub SplitContainer1_SizeChanged(sender As Object, e As EventArgs) Handles SplitContainer1.SizeChanged
+        lblProjectName.Location = New Point(CInt((SplitContainer1.Width / 2) - (lblProjectName.Width / 2)), _
+                            CInt((SplitContainer1.Panel1.Height / 2) - (lblProjectName.Height / 2)))
+    End Sub
+
+    Private Sub PartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PartToolStripMenuItem.Click
+        RaiseEvent PartAddClick()
+    End Sub
+
+    Private Sub PositionslisteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PositionslisteToolStripMenuItem.Click
+        RaiseEvent PosListAddClick()
+    End Sub
+
+    Private Sub btnAddPosition_Click(sender As Object, e As EventArgs) Handles btnAddPosition.Click
+        RaiseEvent PosListEntryAddClick()
+    End Sub
+
+    Private Sub lsbPosLists_Click(sender As Object, e As EventArgs) Handles lsbPosLists.Click
+        RaiseEvent PosListListEntryClick(CType(sender, ListBox), e)
+    End Sub
+
+    Private Sub CellTemplates() Handles dgvPosList.DataSourceChanged
+
+        Dim PosCell As DataGridViewCell = New DataGridViewTextBoxCell
+        Dim AngleCell As DataGridViewCell = New DataGridViewTextBoxCell
+        Dim Project As clsProjekt = clsProgram.MainController.Project
+        Dim CurrentTable As DataTable = Project.PositionLists(Project.PositionLists.IndexOf(CType(dgvPosList.DataSource, clsPosList)))
+
+        PosCell.Style.Format = "#0.000 mm"
+        AngleCell.Style.Format = "#0.00 °"
+
+
+        dgvPosList.Columns(1).CellTemplate = PosCell
+        dgvPosList.Columns(2).CellTemplate = PosCell
+        dgvPosList.Columns(3).CellTemplate = AngleCell
+
+        For Each Element As DataGridViewColumn In dgvPosList.Columns
+            Element.HeaderText = CurrentTable.Columns(Element.Index).Caption
+        Next
+
+    End Sub
+
+    Private Sub dgvPosList_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles dgvPosList.CellBeginEdit
+        RaiseEvent PosListCellBeginEdit(sender, e)
+    End Sub
+
+    Private Sub dgvPosList_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvPosList.CellEndEdit
+        RaiseEvent PosListCellEndEdit(sender, e)
     End Sub
 
 End Class

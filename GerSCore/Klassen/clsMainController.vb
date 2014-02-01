@@ -5,9 +5,9 @@ Public Class clsMainController
     'Deklaration
     '####################################################################################################
 
-    Private _className As String = "clsMainController"
+    Private _className As String = Me.GetType.Name
 
-    Private WithEvents _mainform As frmMain = clsProgramm.MainForm
+    Private WithEvents _mainform As frmMain = clsProgram.MainForm
     Private WithEvents _project As clsProjekt
     Private _fs As FileStream
 
@@ -24,11 +24,11 @@ Public Class clsMainController
     Public Sub New()
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         ' ....
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
     '####################################################################################################
     'Methoden
@@ -37,7 +37,7 @@ Public Class clsMainController
     Private Sub MenuRecentProjectsInit()
         Dim _type As String = "Sub"
         Dim _structname As String = "MenuRecentProjectsInit"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         With My.Settings
             If IsNothing(.RecentProjects) Then .RecentProjects = New Specialized.StringCollection
@@ -63,14 +63,14 @@ Public Class clsMainController
             Next
         End With
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub MenuRecentProjects_Add(ByVal Path As String)
         Dim _type As String = "Sub"
         Dim _structname As String = " MenuRecentProjects_Add"
         Dim _name As String = Path
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         With My.Settings
             If .RecentProjects.Contains(Path) Then
@@ -80,7 +80,7 @@ Public Class clsMainController
         End With
         MenuRecentProjectsInit()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -104,30 +104,30 @@ Public Class clsMainController
     Private Sub MainForm_Loaded() Handles _mainform.Load
         Dim _type As String = "Event"
         Dim _structname As String = "MainForm_Loaded"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         Randomize()
         MenuRecentProjectsInit()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
-    Private Sub Project_New() Handles _mainform.ProjectNew
+    Private Sub Project_New() Handles _mainform.ProjectNewClick
         Dim _type As String = "Event"
         Dim _structname As String = "Project_New"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         _project = clsProjekt.Instance
         RaiseEvent ProjectInit()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
-    Private Sub Project_Open(Optional ByVal Path As String = "") Handles _mainform.ProjectOpen
+    Private Sub Project_Open(Optional ByVal Path As String = "") Handles _mainform.ProjectOpenClick
         Dim _type As String = "Event"
         Dim _structname As String = "openProject"
         Dim _name As String = Path
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         With _mainform
             If Path = "" Then
@@ -157,13 +157,13 @@ Public Class clsMainController
 
         RaiseEvent ProjectInit()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
-    Private Sub Project_Save(ByVal SaveAtPath As Boolean) Handles _mainform.ProjectSave
+    Private Sub Project_Save(ByVal SaveAtPath As Boolean) Handles _mainform.ProjectSaveClick
         Dim _type As String = "Event"
         Dim _structname As String = "Project_Save"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         Dim Path As String
         Dim fs As FileStream
@@ -187,44 +187,82 @@ Public Class clsMainController
             Debug.Print("gespeichert")
             fs.Close()
             My.Settings.RecentPath = Path
-            '_path = Path
+            _mainform.SpeichernToolStripMenuItem.Enabled = True
             RaiseEvent ProjectSaved()
         End With
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub Project_Init() Handles Me.ProjectInit
         Dim _type As String = "Event"
         Dim _structname As String = "Project_Init"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         _mainform.DatenToolStripMenuItem.Enabled = True
+        _mainform.HinzufügenToolStripMenuItem.Enabled = True
         _mainform.SpeichernunterToolStripMenuItem.Enabled = True
         _mainform.pnlProjekt.Visible = True
         If Not Project.Path = "" Then
             _mainform.SpeichernToolStripMenuItem.Enabled = True
         End If
+        PartListInit()
+        PosListListInit()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
+    End Sub
+
+    Private Sub Part_Add() Handles _mainform.PartAddClick
+        Dim _type As String = "Event"
+        Dim _structname As String = "Part_Add"
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+
+        Dim Allowed As Boolean = False
+        Dim Name As String = "Part " & _project.Parts.Count + 1
+
+        Do
+            Name = InputBox("Eindeutige Bezeichnung des Parts eingeben", "Partname", Name)
+            If Name <> "" Then
+                If (From TestItem In _project.Parts Where TestItem.Name = Name).FirstOrDefault Is Nothing Then
+                    _project.AddPart(Name)
+                    Allowed = True
+                Else
+                    MsgBox("Ein Part mit diesem Namen wurde bereits erstellt!", MsgBoxStyle.Critical, "Fehler!")
+                End If
+            Else
+                Exit Sub
+            End If
+        Loop Until Allowed
+
+        clsProgram.DebugPrefix -= 1
+    End Sub
+
+    Private Sub PosList_Add() Handles _mainform.PosListAddClick
+        Dim _type As String = "Event"
+        Dim _structname As String = "PosList_Add"
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+
+        _project.AddPositionList()
+        _mainform.tbcMain.SelectTab("tbpPosList")
+
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub RecentProject_Click(Sender As Object, e As EventArgs)
         Dim _type As String = "Event"
         Dim _structname As String = "RecentProject_Click"
         Dim _name As String = Sender.ToString
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Project_Open(CType(Sender, ToolStripMenuItem).Text)
-        RaiseEvent ProjectInit()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub Title_update() Handles _project.SaveStatusChanged, Me.ProjectInit
         Dim _type As String = "Event"
         Dim _structname As String = "Title_update"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         With _mainform
             .Text = "GerScore - Gerber Shift Correction - " & _project.Name
@@ -233,23 +271,64 @@ Public Class clsMainController
             End If
         End With
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub Project_Namechanged() Handles _project.NameChanged, Me.ProjectInit
         Dim _type As String = "Event"
         Dim _structname As String = "Project_Namechanged"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         _mainform.lblProjectName.Text = Project.Name
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
-    Private Sub Tests_init() Handles _mainform.TestInit
+    Private Sub PartAdded(Optional ByRef Part As clsPart = Nothing) Handles _project.PartAdded
+        Dim _type As String = "Event"
+        Dim _structname As String = "PartAdded"
+        Dim _name As String = Part.Name
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+
+        With _mainform.lsbParts
+            If Not IsNothing(Part) Then
+                If _project.Parts.Count = 1 Then
+                    .Items.Clear()
+                    .SelectionMode = SelectionMode.One
+                    .ValueMember = "Name"
+                End If
+                .Items.Add(Part)
+            End If
+        End With
+        clsProgram.DebugPrefix -= 1
+    End Sub
+
+    Private Sub PosListAdded(Optional ByRef PositionList As clsPosList = Nothing) Handles _project.PositionListAdded
+        Dim _type As String = "Event"
+        Dim _structname As String = Reflection.MethodBase.GetCurrentMethod.Name
+        Dim _name As String = PositionList.TableName
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+
+        With _mainform.lsbPosLists
+            If Not IsNothing(PositionList) Then
+                If _project.PositionLists.Count = 1 Then
+                    .Items.Clear()
+                    .SelectionMode = SelectionMode.One
+                    .ValueMember = "TableName"
+                End If
+                .Items.Add(PositionList)
+                .SelectedItem = PositionList
+                _mainform.dgvPosList.DataSource = PositionList
+            End If
+        End With
+
+        clsProgram.DebugPrefix -= 1
+    End Sub
+
+    Private Sub Tests_init() Handles _mainform.TestInitClick
         Dim _type As String = "Event"
         Dim _structname As String = "Tests_init"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         Project.AddPart("Testpart1")
         Project.AddPart("Testpart2")
@@ -272,7 +351,7 @@ Public Class clsMainController
         Project.Parts(2).Gerber(0).Shapes.Add(New clsLine(Project.Parts(2).Gerber(0), New Point(150, 10), New Point(850 - 150, 500)))
         Project.Parts(2).Gerber(1).Shapes.Add(New clsLine(Project.Parts(2).Gerber(1), New Point(180, 10), New Point(850 - 180, 500)))
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
 End Class

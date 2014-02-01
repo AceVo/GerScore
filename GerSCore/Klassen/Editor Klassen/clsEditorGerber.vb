@@ -19,7 +19,7 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
         Dim _name As String = Gerber.Name
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         _gerber = Gerber
         _editorpart = EditorPart
@@ -48,7 +48,7 @@
             End Select
         Next
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -56,7 +56,7 @@
     '####################################################################################################
 
     Overrides Sub Dispose(ByVal disposing As Boolean)
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorGerber", "Dispose")
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} Sub ->  {1}", "clsEditorGerber", "Dispose")
         If Not disposing Then
             For i = _sc.Shapes.Count - 1 To 0 Step -1
                 CType(_sc.Shapes.Item(i), clsDrawLine).Dispose()
@@ -69,7 +69,7 @@
             _colorpicker = Nothing
             _disposed = True
         End If
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################

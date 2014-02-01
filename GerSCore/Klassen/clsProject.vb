@@ -10,12 +10,14 @@
     <NonSerialized> Private WithEvents _controller As clsMainController
 
     Friend Parts As New List(Of clsPart)
+    Friend PositionLists As New List(Of clsPosList)
 
     Private Event Loaded()
     Private Event Created()
     <NonSerialized> Friend Event SaveStatusChanged()
     <NonSerialized> Friend Event NameChanged()
-    <NonSerialized> Friend Event PartAdded()
+    <NonSerialized> Friend Event PartAdded(ByRef Item As clsPart)
+    <NonSerialized> Friend Event PositionListAdded(ByRef Item As clsPosList)
 
 
     '####################################################################################################
@@ -26,28 +28,27 @@
         Dim _type As String = "Sub"
         Dim _structname As String = "New"
         _name = "Neues Projekt"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
         Project_initiated()
 
-        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Friend Sub Project_initiated(Optional ByVal Loaded As Boolean = False)
         Dim _type As String = "Sub"
         Dim _structname As String = "Project_initiated"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
-        _controller = clsProgramm.MainController
+        _controller = clsProgram.MainController
 
         If Loaded Then
-            clsProgramm.MainForm.SpeichernToolStripMenuItem.Enabled = True
             RaiseEvent Loaded()
         Else
             RaiseEvent Created()
         End If
 
-        Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Leave in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name) : clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -55,16 +56,31 @@
     '####################################################################################################
 
     Friend Sub AddPart(ByVal Name As String)
-        Dim _type As String = "Method"
+        Dim _type As String = "Sub"
         Dim _structname As String = "AddPart"
         Dim _name2 = Name
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3} -> {4}", _className, _type, _structname, _name, _name2)
 
-        Me.Parts.Add(New clsPart(Name))
+        Dim Part As New clsPart(Name)
 
-        RaiseEvent PartAdded()
+        Me.Parts.Add(Part)
 
-        clsProgramm.DebugPrefix -= 1
+        RaiseEvent PartAdded(Part)
+
+        clsProgram.DebugPrefix -= 1
+    End Sub
+
+    Friend Sub AddPositionList()
+        Dim _type As String = "Sub"
+        Dim _structname As String = "AddPositionList"
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
+
+        Dim PosList As New clsPosList
+        Me.PositionLists.Add(PosList)
+
+        RaiseEvent PositionListAdded(PosList)
+
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     '####################################################################################################
@@ -118,27 +134,27 @@
     'Events
     '####################################################################################################
 
-    Private Sub Project_edited() Handles Me.NameChanged, Me.PartAdded, Me.Created
+    Private Sub Project_edited() Handles Me.NameChanged, Me.PartAdded, Me.Created, Me.PositionListAdded
         Dim _type As String = "Event"
         Dim _structname As String = "Project_edited"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         _saved = False
         RaiseEvent SaveStatusChanged()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
     Private Sub Project_save() Handles Me.Loaded, _controller.ProjectSaved
         Dim _type As String = "Event"
         Dim _structname As String = "Project_save"
-        clsProgramm.DebugPrefix += 1 : Debug.Print(StrDup(clsProgramm.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         _saved = True
         _path = My.Settings.RecentPath
         RaiseEvent SaveStatusChanged()
 
-        clsProgramm.DebugPrefix -= 1
+        clsProgram.DebugPrefix -= 1
     End Sub
 
 End Class
