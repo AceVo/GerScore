@@ -206,8 +206,8 @@ Public Class clsMainController
         If Not Project.Path = "" Then
             _mainform.SpeichernToolStripMenuItem.Enabled = True
         End If
-        PartListInit()
-        PosListListInit()
+        PartList_Refresh()
+        PosListList_Refresh()
 
         clsProgram.DebugPrefix -= 1
     End Sub
@@ -280,47 +280,6 @@ Public Class clsMainController
         clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} ", _className, _type, _structname)
 
         _mainform.lblProjectName.Text = Project.Name
-
-        clsProgram.DebugPrefix -= 1
-    End Sub
-
-    Private Sub PartAdded(Optional ByRef Part As clsPart = Nothing) Handles _project.PartAdded
-        Dim _type As String = "Event"
-        Dim _structname As String = "PartAdded"
-        Dim _name As String = Part.Name
-        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
-
-        With _mainform.lsbParts
-            If Not IsNothing(Part) Then
-                If _project.Parts.Count = 1 Then
-                    .Items.Clear()
-                    .SelectionMode = SelectionMode.One
-                    .ValueMember = "Name"
-                End If
-                .Items.Add(Part)
-            End If
-        End With
-        clsProgram.DebugPrefix -= 1
-    End Sub
-
-    Private Sub PosListAdded(Optional ByRef PositionList As clsPosList = Nothing) Handles _project.PositionListAdded
-        Dim _type As String = "Event"
-        Dim _structname As String = Reflection.MethodBase.GetCurrentMethod.Name
-        Dim _name As String = PositionList.TableName
-        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
-
-        With _mainform.lsbPosLists
-            If Not IsNothing(PositionList) Then
-                If _project.PositionLists.Count = 1 Then
-                    .Items.Clear()
-                    .SelectionMode = SelectionMode.One
-                    .ValueMember = "TableName"
-                End If
-                .Items.Add(PositionList)
-                .SelectedItem = PositionList
-                _mainform.dgvPosList.DataSource = PositionList
-            End If
-        End With
 
         clsProgram.DebugPrefix -= 1
     End Sub

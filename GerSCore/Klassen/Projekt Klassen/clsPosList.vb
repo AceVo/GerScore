@@ -1,4 +1,4 @@
-﻿<Serializable> Public Class clsPosList
+﻿<Serializable> Class clsPosList
     Inherits DataTable
     '####################################################################################################
     'Deklaration
@@ -25,6 +25,8 @@
         Dim _name As String = Me.TableName
         clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2} : {3}", _className, _type, _structname, _name)
 
+        Me.RemotingFormat = SerializationFormat.Binary
+
         _posname.Unique = True
         _posname.Caption = "Positionsbezeichnung"
         _xpos.DefaultValue = 0
@@ -34,6 +36,7 @@
         _angle.DefaultValue = 0
         _angle.Caption = "Winkel"
         _part.Caption = "Bauteil"
+
 
         Me.Columns.Add(_posname)
         Me.Columns.Add(_xpos)
@@ -47,6 +50,7 @@
     Protected Sub New(ByVal info As Runtime.Serialization.SerializationInfo, ByVal context As Runtime.Serialization.StreamingContext)
         MyBase.New(info, context)
     End Sub
+
     '####################################################################################################
     'Methoden
     '####################################################################################################
@@ -62,17 +66,5 @@
     '####################################################################################################
     'Events
     '####################################################################################################
-
-    Private Sub clsPosList_RowChanged(sender As Object, e As DataRowChangeEventArgs) Handles Me.RowChanged
-        Dim _type As String = "Event"
-        Dim _structname As String = "RowChanged"
-        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
-
-        'If e.Action = DataRowAction.Add Then
-        '    e.Row.Item(_posname) = "Position_" & Me.Rows.Count
-        'End If
-
-        clsProgram.DebugPrefix -= 1
-    End Sub
 
 End Class

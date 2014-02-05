@@ -4,6 +4,8 @@
     'Deklaration
     '####################################################################################################
 
+    Private _className As String = Me.GetType.Name
+
     Private _usedcolors As New List(Of Color)
     Private WithEvents _controller As clsMainController = clsProgram.MainController
 
@@ -13,8 +15,9 @@
 
     Friend Event PartAddClick()
 
+    Friend Event PosListDataSourceChanged(sender As Object, e As EventArgs)
     Friend Event PosListAddClick()
-    Friend Event PosListListEntryClick(sender As ListBox, e As EventArgs)
+    Friend Event PosListListSelectedIndexChanged(sender As ListBox, e As EventArgs)
     Friend Event PosListEntryAddClick()
     Friend Event PosListCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
     Friend Event PosListCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
@@ -34,10 +37,10 @@
         pnlProjekt.BackColor = clsProgram.FhGGreen
         lblProjectName.ForeColor = clsProgram.FhGGreenVeryLight
         SplitContainer1.IsSplitterFixed = True
-        '   Overview
+        '   -Tabpage Overview
         tbpOverview.BackColor = clsProgram.FhGGreen
         lsbParts.BackColor = clsProgram.FhgGreenLight
-        '   Positionlists
+        '   -Tabpage Positionlists
         tbpPosList.BackColor = clsProgram.FhGGreen
         dgvPosList.BackgroundColor = clsProgram.FhgGreenLight
         btnAddPosition.BackColor = clsProgram.FhGGreenVeryLight
@@ -114,29 +117,12 @@
         RaiseEvent PosListEntryAddClick()
     End Sub
 
-    Private Sub lsbPosLists_Click(sender As Object, e As EventArgs) Handles lsbPosLists.Click
-        RaiseEvent PosListListEntryClick(CType(sender, ListBox), e)
+    Private Sub lsbPosLists_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lsbPosLists.SelectedIndexChanged
+        RaiseEvent PosListListSelectedIndexChanged(CType(sender, ListBox), e)
     End Sub
 
-    Private Sub CellTemplates() Handles dgvPosList.DataSourceChanged
-
-        Dim PosCell As DataGridViewCell = New DataGridViewTextBoxCell
-        Dim AngleCell As DataGridViewCell = New DataGridViewTextBoxCell
-        Dim Project As clsProjekt = clsProgram.MainController.Project
-        Dim CurrentTable As DataTable = Project.PositionLists(Project.PositionLists.IndexOf(CType(dgvPosList.DataSource, clsPosList)))
-
-        PosCell.Style.Format = "#0.000 mm"
-        AngleCell.Style.Format = "#0.00 °"
-
-
-        dgvPosList.Columns(1).CellTemplate = PosCell
-        dgvPosList.Columns(2).CellTemplate = PosCell
-        dgvPosList.Columns(3).CellTemplate = AngleCell
-
-        For Each Element As DataGridViewColumn In dgvPosList.Columns
-            Element.HeaderText = CurrentTable.Columns(Element.Index).Caption
-        Next
-
+    Private Sub dgvPosList_DataSourceChanged(sender As Object, e As EventArgs) Handles dgvPosList.DataSourceChanged
+        RaiseEvent PosListDataSourceChanged(sender, e)
     End Sub
 
     Private Sub dgvPosList_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles dgvPosList.CellBeginEdit

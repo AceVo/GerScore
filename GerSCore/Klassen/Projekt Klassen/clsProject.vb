@@ -10,7 +10,7 @@
     <NonSerialized> Private WithEvents _controller As clsMainController
 
     Friend Parts As New List(Of clsPart)
-    Friend PositionLists As New List(Of clsPosList)
+    Friend PositionLists As New ArrayList
 
     Private Event Loaded()
     Private Event Created()

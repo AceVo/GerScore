@@ -18,6 +18,14 @@
         clsProgram.DebugPrefix -= 1
     End Sub
 
+    Public Sub New()
+        Dim _type As String = "Sub"
+        Dim _structname As String = "New"
+        clsProgram.DebugPrefix += 1 : Debug.Print(StrDup(clsProgram.DebugPrefix, "+") & " " & "Enter in: {0} {1} ->  {2}", _className, _type, _structname)
+
+        clsProgram.DebugPrefix -= 1
+    End Sub
+
     '####################################################################################################
     'Methoden
     '####################################################################################################

@@ -2,10 +2,8 @@
 
 	+ Generell
 		+ Im Hauptbildschirm Übersicht über das Projekt anzeigen
-			+ Name
 			+ Enthaltene Parts
 				+ Enthaltene Gerber
-			+ Tabellarische Übersicht über die Bestückliste
 			+ Grafische Übersicht über die Bestückliste	-> Editor verwendet
 		+ Speichern einzelner Parts
 		+ Exportieren von Parts
@@ -14,7 +12,6 @@
 		+ Importieren von Gerber
 	+ Projekt
 		+ Einfügen von Modulen, die mehrere Parts (gleiche/unterschiedliche) beinhalten können
-		+ Bestückliste einbauen
 		+ Bestücklisten aus ASCII Daten importieren -> mit Templates
 		+ Bestücklisten generieren können, aus Step & Repeat & Anfangsposition (Absolut & Referenziert)
 		+ Bestücklisten Exportieren
@@ -55,8 +52,16 @@
 
 #### erledigt!
 
-	+ Generell
+	+ Generell	
+		+ Im Hauptbildschirm Übersicht über das Projekt anzeigen																		01.02.2014
+			+ Name																														01.02.2014		
+			+ Enthaltene Parts																											01.02.2014
+			+ Tabellarische Übersicht über die Bestückliste																				01.02.2014
 		+ Speichern vom Projekt																											14.01.2014
+
+	+ Projekt
+		+ Bestückliste einbauen																											01.02.2014
+			+ Parts in der Bestückliste verlinken																						05.02.2014
 
 	+ aktuelle Koordinaten des Cursors anzeigen
 		- Mausposition über Shapes sind falsch

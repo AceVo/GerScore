@@ -100,14 +100,18 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialoge\dlgParts.Designer.vb">
+      <DependentUpon>dlgParts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dialoge\dlgParts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Klassen\clsMainController.vb" />
     <Compile Include="Klassen\clsMainController_TabOverview.vb" />
     <Compile Include="Klassen\clsMainController_TabPosLists.vb" />
-    <Compile Include="Klassen\clsPosition.vb" />
-    <Compile Include="Klassen\clsPosList.vb">
+    <Compile Include="Klassen\Projekt Klassen\clsPosList.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Klassen\clsPosListItem.vb" />
     <Compile Include="Klassen\clsProgramm.vb" />
     <Compile Include="Klassen\Editor Klassen\clsCanvas.vb">
       <SubType>Component</SubType>
@@ -116,15 +120,14 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Klassen\Editor Klassen\clsEditor.vb" />
-    <Compile Include="Klassen\clsGerber.vb" />
+    <Compile Include="Klassen\Projekt Klassen\clsGerber.vb" />
     <Compile Include="Klassen\clsGrundklasse.vb" />
     <Compile Include="Klassen\Editor Klassen\clsEditorGerber.vb" />
     <Compile Include="Klassen\Editor Klassen\clsEditorItem.vb" />
     <Compile Include="Klassen\Editor Klassen\clsDrawLine.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Klassen\clsMausobjekt.vb" />
-    <Compile Include="Klassen\clsPart.vb" />
+    <Compile Include="Klassen\Projekt Klassen\clsPart.vb" />
     <Compile Include="Forms\frmPartlist.Designer.vb">
       <DependentUpon>frmPartlist.vb</DependentUpon>
     </Compile>
@@ -163,10 +166,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Klassen\clsProject.vb" />
+    <Compile Include="Klassen\Projekt Klassen\clsProject.vb" />
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialoge\dlgParts.resx">
+      <DependentUpon>dlgParts.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPartlist.resx">
       <DependentUpon>frmPartlist.vb</DependentUpon>
     </EmbeddedResource>

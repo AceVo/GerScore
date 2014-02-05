@@ -94,7 +94,7 @@ Partial Class frmMain
         Me.MnuStrMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DateiToolStripMenuItem, Me.BearbeitenToolStripMenuItem, Me.ExtrasToolStripMenuItem, Me.HilfeToolStripMenuItem, Me.DatenToolStripMenuItem, Me.HinzufügenToolStripMenuItem})
         Me.MnuStrMain.Location = New System.Drawing.Point(0, 0)
         Me.MnuStrMain.Name = "MnuStrMain"
-        Me.MnuStrMain.Size = New System.Drawing.Size(1161, 24)
+        Me.MnuStrMain.Size = New System.Drawing.Size(1180, 24)
         Me.MnuStrMain.TabIndex = 0
         Me.MnuStrMain.Text = "Hauptmenü Streifen"
         '
@@ -264,13 +264,13 @@ Partial Class frmMain
         'AnpassenToolStripMenuItem
         '
         Me.AnpassenToolStripMenuItem.Name = "AnpassenToolStripMenuItem"
-        Me.AnpassenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AnpassenToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.AnpassenToolStripMenuItem.Text = "&Anpassen"
         '
         'OptionenToolStripMenuItem
         '
         Me.OptionenToolStripMenuItem.Name = "OptionenToolStripMenuItem"
-        Me.OptionenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OptionenToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.OptionenToolStripMenuItem.Text = "&Optionen"
         '
         'HilfeToolStripMenuItem
@@ -285,30 +285,30 @@ Partial Class frmMain
         'InhaltToolStripMenuItem
         '
         Me.InhaltToolStripMenuItem.Name = "InhaltToolStripMenuItem"
-        Me.InhaltToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.InhaltToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.InhaltToolStripMenuItem.Text = "I&nhalt"
         '
         'IndexToolStripMenuItem
         '
         Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
-        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.IndexToolStripMenuItem.Text = "&Index"
         '
         'SuchenToolStripMenuItem
         '
         Me.SuchenToolStripMenuItem.Name = "SuchenToolStripMenuItem"
-        Me.SuchenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SuchenToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.SuchenToolStripMenuItem.Text = "&Suchen"
         '
         'toolStripSeparator5
         '
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        Me.toolStripSeparator5.Size = New System.Drawing.Size(149, 6)
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(110, 6)
         '
         'InfoToolStripMenuItem
         '
         Me.InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
-        Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.InfoToolStripMenuItem.Size = New System.Drawing.Size(113, 22)
         Me.InfoToolStripMenuItem.Text = "Inf&o..."
         '
         'DatenToolStripMenuItem
@@ -355,13 +355,13 @@ Partial Class frmMain
         'PartToolStripMenuItem
         '
         Me.PartToolStripMenuItem.Name = "PartToolStripMenuItem"
-        Me.PartToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PartToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.PartToolStripMenuItem.Text = "Part"
         '
         'PositionslisteToolStripMenuItem
         '
         Me.PositionslisteToolStripMenuItem.Name = "PositionslisteToolStripMenuItem"
-        Me.PositionslisteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PositionslisteToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.PositionslisteToolStripMenuItem.Text = "Positionsliste"
         '
         'pnlProjekt
@@ -371,7 +371,7 @@ Partial Class frmMain
         Me.pnlProjekt.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProjekt.Location = New System.Drawing.Point(0, 24)
         Me.pnlProjekt.Name = "pnlProjekt"
-        Me.pnlProjekt.Size = New System.Drawing.Size(1161, 549)
+        Me.pnlProjekt.Size = New System.Drawing.Size(1180, 612)
         Me.pnlProjekt.TabIndex = 1
         Me.pnlProjekt.Visible = False
         '
@@ -390,7 +390,7 @@ Partial Class frmMain
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.tbcMain)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1161, 549)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1180, 612)
         Me.SplitContainer1.SplitterDistance = 40
         Me.SplitContainer1.TabIndex = 2
         '
@@ -415,7 +415,7 @@ Partial Class frmMain
         Me.tbcMain.Multiline = True
         Me.tbcMain.Name = "tbcMain"
         Me.tbcMain.SelectedIndex = 0
-        Me.tbcMain.Size = New System.Drawing.Size(1161, 505)
+        Me.tbcMain.Size = New System.Drawing.Size(1180, 568)
         Me.tbcMain.TabIndex = 2
         '
         'tbpOverview
@@ -460,7 +460,7 @@ Partial Class frmMain
         Me.tbpPosList.Location = New System.Drawing.Point(4, 4)
         Me.tbpPosList.Name = "tbpPosList"
         Me.tbpPosList.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpPosList.Size = New System.Drawing.Size(1153, 479)
+        Me.tbpPosList.Size = New System.Drawing.Size(1172, 542)
         Me.tbpPosList.TabIndex = 1
         Me.tbpPosList.Text = "Positionslisten"
         '
@@ -505,7 +505,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(122, Byte), Integer), CType(CType(209, Byte), Integer), CType(CType(181, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1161, 573)
+        Me.ClientSize = New System.Drawing.Size(1180, 636)
         Me.Controls.Add(Me.pnlProjekt)
         Me.Controls.Add(Me.MnuStrMain)
         Me.MainMenuStrip = Me.MnuStrMain
